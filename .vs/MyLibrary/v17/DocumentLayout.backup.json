@@ -7,12 +7,20 @@
       "RelativeMoniker": "D:0:0:{C1E5E4BB-79A4-4DFC-A8D7-F5E71F58289D}|Library.UI\\Library.UI.csproj|solutionrelative:library.ui\\viewmodels\\librarymainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C4A26363-9B3E-4B96-9BAD-F6729451B0DC}|Services\\Services.csproj|d:\\cti\\aprendizaje\\programacion\\mylibrary\\mylibrary\\services\\mongoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4A26363-9B3E-4B96-9BAD-F6729451B0DC}|Services\\Services.csproj|solutionrelative:services\\mongoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{50B637F5-FCF6-490D-827D-1F4BF59B8617}|Library.Core\\Library.Core.csproj|d:\\cti\\aprendizaje\\programacion\\mylibrary\\mylibrary\\library.core\\models\\library.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{50B637F5-FCF6-490D-827D-1F4BF59B8617}|Library.Core\\Library.Core.csproj|solutionrelative:library.core\\models\\library.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50B637F5-FCF6-490D-827D-1F4BF59B8617}|Library.Core\\Library.Core.csproj|d:\\cti\\aprendizaje\\programacion\\mylibrary\\mylibrary\\library.core\\interfaces\\ilibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{50B637F5-FCF6-490D-827D-1F4BF59B8617}|Library.Core\\Library.Core.csproj|solutionrelative:library.core\\interfaces\\ilibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{50B637F5-FCF6-490D-827D-1F4BF59B8617}|Library.Core\\Library.Core.csproj|d:\\cti\\aprendizaje\\programacion\\mylibrary\\mylibrary\\library.core\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50B637F5-FCF6-490D-827D-1F4BF59B8617}|Library.Core\\Library.Core.csproj|solutionrelative:library.core\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B23DEF0-3955-41E5-BC7A-2451F061BF71}|Library.Global\\Library.Global.csproj|d:\\cti\\aprendizaje\\programacion\\mylibrary\\mylibrary\\library.global\\applicationconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B23DEF0-3955-41E5-BC7A-2451F061BF71}|Library.Global\\Library.Global.csproj|solutionrelative:library.global\\applicationconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,56 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 720,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -80,58 +40,62 @@
               "RelativeDocumentMoniker": "Library.UI\\ViewModels\\LibraryMainViewModel.cs",
               "ToolTip": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.UI\\ViewModels\\LibraryMainViewModel.cs",
               "RelativeToolTip": "Library.UI\\ViewModels\\LibraryMainViewModel.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAADwvyUAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAAAIgAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T18:32:06.905Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ILibrary.cs",
-              "DocumentMoniker": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.Core\\Interfaces\\ILibrary.cs",
-              "RelativeDocumentMoniker": "Library.Core\\Interfaces\\ILibrary.cs",
-              "ToolTip": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.Core\\Interfaces\\ILibrary.cs",
-              "RelativeToolTip": "Library.Core\\Interfaces\\ILibrary.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAjwCoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T18:31:55.542Z",
+              "WhenOpened": "2025-02-28T14:40:15.909Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "MongoService.cs",
+              "DocumentMoniker": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Services\\MongoService.cs",
+              "RelativeDocumentMoniker": "Services\\MongoService.cs",
+              "ToolTip": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Services\\MongoService.cs",
+              "RelativeToolTip": "Services\\MongoService.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T14:21:23.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Library.cs",
               "DocumentMoniker": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.Core\\Models\\Library.cs",
               "RelativeDocumentMoniker": "Library.Core\\Models\\Library.cs",
               "ToolTip": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.Core\\Models\\Library.cs",
               "RelativeToolTip": "Library.Core\\Models\\Library.cs",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAqwHYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T16:10:57.096Z",
+              "WhenOpened": "2025-02-28T14:35:21.936Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 564,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:381490558:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Book.cs",
+              "DocumentMoniker": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.Core\\Models\\Book.cs",
+              "RelativeDocumentMoniker": "Library.Core\\Models\\Book.cs",
+              "ToolTip": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.Core\\Models\\Book.cs",
+              "RelativeToolTip": "Library.Core\\Models\\Book.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAASwBQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T14:17:46.202Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationConstants.cs",
+              "DocumentMoniker": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.Global\\ApplicationConstants.cs",
+              "RelativeDocumentMoniker": "Library.Global\\ApplicationConstants.cs",
+              "ToolTip": "D:\\CTI\\Aprendizaje\\Programacion\\MyLibrary\\MyLibrary\\Library.Global\\ApplicationConstants.cs",
+              "RelativeToolTip": "Library.Global\\ApplicationConstants.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T14:23:53.541Z",
+              "EditorCaption": ""
             }
           ]
         }

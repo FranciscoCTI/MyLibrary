@@ -12,6 +12,7 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Services\obj\Debug\net8.0\Se
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Services\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Services\obj\Debug\net8.0\Services.AssemblyInfo.cs
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Services\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Services\obj\Debug\net8.0\Services.sourcelink.json
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Services\obj\Debug\net8.0\Services.csproj.Up2Date
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Services\obj\Debug\net8.0\Services.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Services\obj\Debug\net8.0\refint\Services.dll

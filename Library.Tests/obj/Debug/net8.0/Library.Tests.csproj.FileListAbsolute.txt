@@ -12,8 +12,10 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Library.Tests.runtimeconfig.json
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Library.Tests.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Library.Tests.pdb
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\DnsClient.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.ApplicationInsights.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.Testing.Extensions.Telemetry.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.Testing.Extensions.TrxReport.Abstractions.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.Testing.Extensions.VSTestBridge.dll
@@ -26,9 +28,14 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.TestPlatform.CrossPlatEngine.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.TestPlatform.Utilities.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Microsoft.VisualStudio.TestPlatform.Common.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\MongoDB.Bson.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\MongoDB.Driver.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\nunit.framework.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\nunit.framework.legacy.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\SharpCompress.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\Snappier.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\ZstdSharp.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\cs\Microsoft.Testing.Extensions.Telemetry.resources.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\de\Microsoft.Testing.Extensions.Telemetry.resources.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\bin\Debug\net8.0\es\Microsoft.Testing.Extensions.Telemetry.resources.dll
@@ -157,6 +164,7 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\obj\Debug\net8
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\obj\Debug\net8.0\Library.Tests.AssemblyInfoInputs.cache
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\obj\Debug\net8.0\Library.Tests.AssemblyInfo.cs
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\obj\Debug\net8.0\Library.Tests.csproj.CoreCompileInputs.cache
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\obj\Debug\net8.0\Library.Tests.sourcelink.json
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\obj\Debug\net8.0\Library..1278DCCD.Up2Date
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\obj\Debug\net8.0\Library.Tests.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.Tests\obj\Debug\net8.0\refint\Library.Tests.dll

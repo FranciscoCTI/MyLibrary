@@ -8,6 +8,7 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Lib
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.AssemblyInfoInputs.cache
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.AssemblyInfo.cs
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.csproj.CoreCompileInputs.cache
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.sourcelink.json
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library..36051AA6.Up2Date
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\refint\Library.Solvers.dll

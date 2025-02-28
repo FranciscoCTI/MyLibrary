@@ -53,6 +53,9 @@ namespace Library.UI.ViewModels
         /// </summary>
         private ExceptionManager ExceptionManager { get;}
 
+        private readonly MongoService _mongoService;
+
+
         /// <summary>
         /// Creates a new instance of <see cref="LibraryMainViewModel"/>
         /// </summary>
@@ -61,6 +64,24 @@ namespace Library.UI.ViewModels
             Library = new Core.Models.Library("Mi biblioteca");
 
             ExceptionManager = new ExceptionManager();
+
+            _mongoService = new MongoService();
+
+            _ = LoadElementsAsync();
+        }
+
+        private async Task LoadElementsAsync()
+        {
+            var bookListFromDB = _mongoService.GetBooksAsync();
+
+            var elementList = await bookListFromDB;
+            Library.BookCollection.Clear();
+
+            foreach (var itemBook in elementList)
+            {
+                Library.BookCollection.Add(itemBook);
+            }
+            
         }
 
         /// <summary>
@@ -70,7 +91,7 @@ namespace Library.UI.ViewModels
         /// If there is any error during the process the
         /// <see cref="Library.Infrastructure.Services.ExceptionManager"/> Handles it.
         /// </summary>
-        private void AddBook()
+        private async void AddBook()
         {
             try
             {
@@ -82,11 +103,21 @@ namespace Library.UI.ViewModels
                 BookWindowViewModel vm = bookWindow.DataContext as BookWindowViewModel;
 
                 Library.InsertBook(vm.Book);
+
+                await AddBookAsync(vm.Book);
+
+                _ = LoadElementsAsync();
+
             }
             catch (Exception e)
             {
                 ExceptionManager.HandleException(e, "Add Book");
             }
+        }
+
+        private async Task AddBookAsync(IBook book)
+        {
+            await _mongoService.AddBookAsync((Book)book);
         }
 
         /// <summary>
@@ -95,7 +126,7 @@ namespace Library.UI.ViewModels
         /// the process the <see cref="Library.Infrastructure.Services.ExceptionManager"/>
         /// handles it.
         /// </summary>
-        private void RemoveBook()
+        private async void RemoveBook()
         {
             try
             {
@@ -104,12 +135,21 @@ namespace Library.UI.ViewModels
                 {
                     IBook book = (IBook)toBeRemoved;
                     Library.RemoveBook(book.ISBN);
+
+                    await RemoveBookAsync(book.ISBN);
+
+                    _ = LoadElementsAsync();
                 }
             }
             catch (Exception e)
             {
                 ExceptionManager.HandleException(e, "Remove Book");
             }
+        }
+
+        private async Task RemoveBookAsync(long isbn)
+        {
+            await _mongoService.RemoveBookAsync(isbn);
         }
 
         /// <summary>

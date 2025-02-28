@@ -3,6 +3,13 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\TestConsole.runtimeconfig.json
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\TestConsole.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\TestConsole.pdb
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\DnsClient.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\MongoDB.Bson.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\MongoDB.Driver.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\SharpCompress.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\Snappier.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\ZstdSharp.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\Library.Core.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\Library.Global.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\bin\Debug\net8.0\Library.Solvers.dll
@@ -14,6 +21,7 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\obj\Debug\net8.0
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\obj\Debug\net8.0\TestConsole.AssemblyInfoInputs.cache
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\obj\Debug\net8.0\TestConsole.AssemblyInfo.cs
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\obj\Debug\net8.0\TestConsole.csproj.CoreCompileInputs.cache
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\obj\Debug\net8.0\TestConsole.sourcelink.json
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\obj\Debug\net8.0\TestCons.AA59A120.Up2Date
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\obj\Debug\net8.0\TestConsole.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\TestConsole\obj\Debug\net8.0\refint\TestConsole.dll

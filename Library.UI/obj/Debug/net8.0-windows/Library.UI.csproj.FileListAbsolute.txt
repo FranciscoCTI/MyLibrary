@@ -3,6 +3,13 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\Library.UI.runtimeconfig.json
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\Library.UI.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\Library.UI.pdb
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\DnsClient.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\MongoDB.Bson.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\MongoDB.Driver.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\SharpCompress.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\Snappier.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\ZstdSharp.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\Library.Core.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\Library.Global.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\bin\Debug\net8.0-windows\Library.Solvers.dll
@@ -25,6 +32,7 @@ D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\obj\Debug\net8.0-
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\obj\Debug\net8.0-windows\Library.UI.AssemblyInfoInputs.cache
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\obj\Debug\net8.0-windows\Library.UI.AssemblyInfo.cs
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\obj\Debug\net8.0-windows\Library.UI.csproj.CoreCompileInputs.cache
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\obj\Debug\net8.0-windows\Library.UI.sourcelink.json
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\obj\Debug\net8.0-windows\Library.UI.csproj.Up2Date
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\obj\Debug\net8.0-windows\Library.UI.dll
 D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Library.UI\obj\Debug\net8.0-windows\refint\Library.UI.dll

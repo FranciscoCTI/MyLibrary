@@ -1,0 +1,80 @@
+﻿<Window x:Class="Library.UI.Views.LibraryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library.UI"
+        xmlns:vm ="clr-namespace:Library.UI.ViewModels"
+        mc:Ignorable="d"
+        Title="Library" 
+        Height="600" 
+        Width="900">
+
+    <Window.DataContext>
+        <vm:LibraryMainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Label with Library title-->
+        <Label 
+            Grid.Column="1" 
+            HorizontalAlignment="Left"
+            Content ="{Binding LibraryName, 
+                        UpdateSourceTrigger=PropertyChanged}"
+            ></Label>
+
+        <!--Datagrid that shows all the books from the Library-->
+        <DataGrid
+            Grid.Column="1"
+            Grid.Row="1"
+            Name="dgrBooks"
+            d:ItemsSource="{d:SampleData}"
+            ItemsSource="{Binding Path=Library.BookCollection, 
+                            UpdateSourceTrigger=PropertyChanged}">
+        </DataGrid>
+
+        <!--Buttons-->
+        <StackPanel Orientation="Horizontal" 
+                    Grid.Column="1" 
+                    Grid.Row="3" 
+                    HorizontalAlignment="Stretch">
+
+            <!--Add Book button-->
+            <Button Name="BtnAddBook" 
+                    Content="Add" 
+                    HorizontalAlignment="Stretch"
+                    Margin="5" 
+                    Command="{Binding AddBookCommand}"
+                    Width="100"></Button>
+
+            <!--Remove Book button-->
+            <Button Name="BtnRemoveBook" 
+                    Content="Remove" 
+                    HorizontalAlignment="Stretch"
+                    Margin="5" 
+                    Command="{Binding RemoveBookCommand}"
+                    Width="100"></Button>
+
+            <!--Edit Book button-->
+            <Button Name="BtnEditBook" 
+                    Content="Edit" 
+                    HorizontalAlignment="Stretch"
+                    Margin="5" 
+                    Command="{Binding EditBookCommand}"
+                    Width="100"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

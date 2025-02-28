@@ -1,0 +1,15 @@
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\bin\Debug\net8.0\Library.Solvers.deps.json
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\bin\Debug\net8.0\Library.Solvers.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\bin\Debug\net8.0\Library.Solvers.pdb
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\bin\Debug\net8.0\Library.Global.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\bin\Debug\net8.0\Library.Global.pdb
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.csproj.AssemblyReference.cache
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.GeneratedMSBuildEditorConfig.editorconfig
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.AssemblyInfoInputs.cache
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.AssemblyInfo.cs
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.csproj.CoreCompileInputs.cache
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library..36051AA6.Up2Date
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\refint\Library.Solvers.dll
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\Library.Solvers.pdb
+D:\CTI\Aprendizaje\Programacion\MyLibrary\MyLibrary\Solvers\obj\Debug\net8.0\ref\Library.Solvers.dll

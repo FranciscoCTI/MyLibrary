@@ -54,10 +54,18 @@ namespace Library.UI.ViewModels
             {
                 Book.ISBN = long.Parse(BookWindow.TbxIsbn.Text);
                 Book.Name = BookWindow.TbxTitle.Text;
-                Book.Author = BookWindow.TbxAuthor.Text;
+                Book.Authors = GetAuthorInformation(BookWindow);
                 Book.Description = BookWindow.TbxDescription.Text;
             }
             BookWindow.Close();
+        }
+
+        private IAuthorInformation GetAuthorInformation(BookWindow bookWindow)
+        {
+            IAuthorInformation authorInformation = new AuthorInformation();
+            var contentAuthors = bookWindow.ItemsCtrlAuthors.ItemsSource as IEnumerable<IAuthor>;
+
+            return authorInformation;
         }
 
         /// <summary>

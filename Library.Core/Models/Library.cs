@@ -62,7 +62,7 @@ namespace Library.Core.Models
             if (Books.ContainsKey(bookToUpdate.ISBN))
             {
                 Books[bookToUpdate.ISBN].Name = bookToUpdate.Name;
-                Books[bookToUpdate.ISBN].Author = bookToUpdate.Author;
+                Books[bookToUpdate.ISBN].Authors = bookToUpdate.Authors;
                 Books[bookToUpdate.ISBN].ISBN = bookToUpdate.ISBN;
                 Books[bookToUpdate.ISBN].Description = bookToUpdate.Description;
 

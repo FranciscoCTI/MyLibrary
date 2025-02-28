@@ -11,7 +11,7 @@ namespace Library.Core.Models
     public class User: IUser 
     {
         /// <inheritdoc />
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         /// <inheritdoc />
         public string LastName { get; set; }
@@ -28,7 +28,7 @@ namespace Library.Core.Models
         /// <param name="name">The first name of this user</param>
         public User(string name)
         {
-            this.Name = name;
+            this.FirstName = name;
             this.LastName = "-";
             this.Age = 0;
             this.Address = new Address();

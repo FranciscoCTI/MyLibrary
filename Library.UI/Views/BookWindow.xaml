@@ -70,15 +70,25 @@
             <!--Grid with DockPanel with Author content-->
             <Grid>
                 <DockPanel LastChildFill="True">
-                    <Label>Author:</Label>
-                    <TextBox Name="TbxAuthor"
+                    <Label>Authors:</Label>
+                    <ItemsControl ItemsSource="{Binding Book.Authors.Authors}"
+                                  d:ItemsSource="{d:SampleData}"
+                                  Name="ItemsCtrlAuthors">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding FirstName }">
+                                        </TextBox>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <!--<TextBox Name="TbxAuthor"
                              Text="{Binding Book.Author, UpdateSourceTrigger=PropertyChanged}"
                              TextAlignment="Center"
                              HorizontalAlignment="Stretch"
                              VerticalContentAlignment="Center"
                              Margin="2,2,2,2"
                              DockPanel.Dock="Left">
-                    </TextBox>
+                    </TextBox>-->
                 </DockPanel>
             </Grid>
 

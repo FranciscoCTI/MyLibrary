@@ -16,7 +16,7 @@ namespace Library.Tests
         {
             Book = new Book("Don quijote de la mancha");
             Book.CreateIsbnByDefault();
-            Book.Author = "Miguel de servantes y saavedra";
+            Book.Authors = new AuthorInformation();
             Book.Description = "El ingenioso hidalgo";
         }
 

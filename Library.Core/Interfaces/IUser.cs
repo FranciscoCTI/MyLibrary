@@ -9,7 +9,7 @@ namespace Library.Core.Interfaces
         /// <summary>
         /// The first name of the <see cref="IUser"/>
         /// </summary>
-        string Name { get; set; }
+        string FirstName { get; set; }
 
         /// <summary>
         /// The last name of the <see cref="IUser"/>

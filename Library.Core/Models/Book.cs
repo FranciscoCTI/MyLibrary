@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
+using Library.Core.Enums;
 using Library.Core.Interfaces;
 using Library.Solvers;
 using MongoDB.Bson;
@@ -28,7 +30,10 @@ namespace Library.Core.Models
         public string Description { get; set; }
 
         /// <inheritdoc />
-        public string Author { get; set; }
+        [BsonElement("Authors")]
+        public IAuthorInformation Authors { get; set; }
+
+        public List<Theme> Themes { get; set; }
 
         /// <summary>
         /// The constructor for <see cref="IBook"/>
@@ -37,7 +42,7 @@ namespace Library.Core.Models
         public Book(string name)
         {
             this.Name = name;
-            this.Author = "-";
+            this.Authors = new AuthorInformation();
             this.Description = "-";
         }
 

@@ -13,5 +13,6 @@ public interface IAuthorInformation:INotifyPropertyChanged
     List<IAuthor> Authors { get; set; }
 
     void AddNewAuthor(IAuthor author);
+    bool Any();
     void InputAuthors(IEnumerable<IAuthor>? contentAuthors);
 }

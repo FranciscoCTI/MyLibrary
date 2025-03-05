@@ -187,9 +187,12 @@ namespace Library.UI.ViewModels
                     bookWindow.SetBook(toBeEdited);
                     bookWindow.ShowDialog();
 
-                    await UpdateBookAsync(isbn, toBeEdited);
+                    if (bookWindow.DialogResult== true)
+                    {
+                        await UpdateBookAsync(isbn, toBeEdited);
 
-                    _ = LoadElementsAsync();
+                        _ = LoadElementsAsync();
+                    }
                 }
             }
             catch (Exception e)

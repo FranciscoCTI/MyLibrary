@@ -54,6 +54,12 @@ namespace Library.Core.Models
         {
             Authors.Add(author);
         }
+
+        public bool Any()
+        {
+            return Authors.Count > 0;
+        }
+
         public void InputAuthors(IEnumerable<IAuthor>? contentAuthors)
         {
             Authors.Clear();

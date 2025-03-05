@@ -53,6 +53,11 @@ namespace Library.UI.ViewModels
         public RelayCommand AddAuthorCommand => new(execute => AddAuthor());
 
         /// <summary>
+        /// Command to add a new Author
+        /// </summary>
+        public RelayCommand RemoveAuthorCommand => new(execute => RemoveAuthor());
+
+        /// <summary>
         /// The current UI which this ViewModel controls
         /// </summary>
         public BookWindow BookWindow;
@@ -86,24 +91,8 @@ namespace Library.UI.ViewModels
         /// </summary>
         private void ProceedAddingBook()
         {
-            if (Book != null)
-            {
-                Book.ISBN = long.Parse(BookWindow.TbxIsbn.Text);
-                Book.Name = BookWindow.TbxTitle.Text;
-                Book.Authors = GetAuthorInformation(BookWindow);
-                Book.Description = BookWindow.TbxDescription.Text;
-            }
+            BookWindow.DialogResult = true;
             BookWindow.Close();
-        }
-
-        private IAuthorInformation GetAuthorInformation(BookWindow bookWindow)
-        {
-            IAuthorInformation authorInformation = new AuthorInformation();
-            var contentAuthors = bookWindow.ItemsCtrlAuthors.ItemsSource as IEnumerable<IAuthor>;
-
-            authorInformation.InputAuthors(contentAuthors);
-
-            return authorInformation;
         }
 
         /// <summary>
@@ -111,13 +100,23 @@ namespace Library.UI.ViewModels
         /// </summary>
         private void CancelAddingBook()
         {
-            Book = null;
+            BookWindow.DialogResult = false;
             BookWindow.Close();
         }
         public void AddAuthor()
         {
             Book.Authors.Authors.Add(new Author("Perico","Los palotes"));
             BookWindow.ItemsCtrlAuthors.ItemsSource = AuthorsCollection;
+        }
+
+        public void RemoveAuthor()
+        {
+            if (Book.Authors.Any())
+            {
+                IAuthor lastAuthor = Book.Authors.Authors.Last();
+                Book.Authors.Authors.Remove(lastAuthor);
+                BookWindow.ItemsCtrlAuthors.ItemsSource = AuthorsCollection;
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -10,6 +10,9 @@ namespace Library.Tests.Models
     /// </summary>
     internal class FixedAddress : IAddress
     {
+        /// <inheritdoc/>
+        public string AddressId { get; set; }
+
         /// <inheritdoc />
         public string Street { get; set; }
 

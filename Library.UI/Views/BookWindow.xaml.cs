@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using Library.Core.Models;
 
 namespace Library.UI.Views
 {
@@ -17,7 +19,15 @@ namespace Library.UI.Views
         {
             InitializeComponent();
 
-            _viewModel = DataContext as BookWindowViewModel;
+            _viewModel = this.DataContext as BookWindowViewModel;
+            _viewModel.BookWindow = this;
+        }
+        public BookWindow(BookWindowViewModel bwvn)
+        {
+            InitializeComponent();
+
+            this.DataContext = bwvn;
+            _viewModel = this.DataContext as BookWindowViewModel;
             _viewModel.BookWindow = this;
         }
 

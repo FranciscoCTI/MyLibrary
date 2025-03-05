@@ -10,6 +10,9 @@ namespace Library.Core.Models
     /// </summary>
     public class Address : IAddress
     {
+        /// <inheritdoc/>
+        public string AddressId { get; set; }
+
         /// <inheritdoc />
         public string Street { get; set;}
 

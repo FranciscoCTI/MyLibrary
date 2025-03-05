@@ -24,8 +24,7 @@ namespace Library.Core.Models
         public ILibraryUsersInformation UsersInformation{get;}
 
         /// <inheritdoc />
-        public ObservableCollection<IBook> BookCollection => 
-            new ObservableCollection<IBook>(Books.Values);
+        public ObservableCollection<IBook> BookCollection { get; set; }
 
         /// <summary>
         /// Constructor for the <see cref="ILibrary"/>
@@ -35,25 +34,7 @@ namespace Library.Core.Models
         {
             this.UsersInformation = new LibraryUsersInformation();
             this.Name = libraryName;
-
-            this.InsertDummyBooks();
-        }
-
-        /// <summary>
-        /// Create dummy <see cref="IBook"/>s for the development phase only
-        /// </summary>
-        private void InsertDummyBooks()
-        {
-            IBook b1 = new Book("Don quijote de la mancha");
-            b1.CreateIsbnByDefault();
-            IBook b2 = new Book("Capitalism, the unknown ideal");
-            b2.CreateIsbnByDefault();
-            IBook b3 = new Book("Philosophy who needs it");
-            b3.CreateIsbnByDefault();
-
-            this.InsertBook(b1);
-            this.InsertBook(b2);
-            this.InsertBook(b3);
+            this.BookCollection = new ObservableCollection<IBook>();
         }
 
         /// <inheritdoc />
@@ -81,7 +62,7 @@ namespace Library.Core.Models
             if (Books.ContainsKey(bookToUpdate.ISBN))
             {
                 Books[bookToUpdate.ISBN].Name = bookToUpdate.Name;
-                Books[bookToUpdate.ISBN].Author = bookToUpdate.Author;
+                Books[bookToUpdate.ISBN].Authors = bookToUpdate.Authors;
                 Books[bookToUpdate.ISBN].ISBN = bookToUpdate.ISBN;
                 Books[bookToUpdate.ISBN].Description = bookToUpdate.Description;
 

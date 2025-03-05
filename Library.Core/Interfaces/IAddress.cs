@@ -1,10 +1,21 @@
-﻿namespace Library.Core.Interfaces;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
+namespace Library.Core.Interfaces;
 
 /// <summary>
 /// Represents a city address definition
 /// </summary>
 public interface IAddress
 {
+
+    /// <summary>
+    /// The mongo id for this element
+    /// </summary>
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string AddressId { get; set; }
+
     /// <summary>
     /// The street where the property is located
     /// </summary>

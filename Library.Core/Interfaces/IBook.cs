@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Library.Core.Enums;
+using Library.Core.Models;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Library.Core.Interfaces
 {
@@ -11,6 +14,11 @@ namespace Library.Core.Interfaces
     /// </summary>
     public interface IBook:INotifyPropertyChanged
     {
+        /// <summary>
+        /// Id for mongo serializing
+        /// </summary>
+        public string MongoId { get; set; }
+
         /// <summary>
         /// The international code for this <see cref="IBook"/> (International Standard Book
         /// Number).
@@ -31,9 +39,10 @@ namespace Library.Core.Interfaces
         /// <summary>
         /// The creators of the <see cref="IBook"/>.
         /// </summary>
+        [BsonElement("Authors")]
         IAuthorInformation Authors { get; set; }
 
-        List<Theme> Themes { get; set; } 
+        List<Theme> Themes { get; set; }
 
         /// <summary>
         /// Automatically creates a new ISBN, this is not a real ISBN (since it´s not calculated with the real algorithm), only a placeholder value.

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using Library.UI.Views;
 using System.Runtime.CompilerServices;
 using Library.Core.Models;
+using System.Collections.ObjectModel;
 
 namespace Library.UI.ViewModels
 {
@@ -14,12 +15,27 @@ namespace Library.UI.ViewModels
     /// ViewModel for the BookWindow UI. Which shows the properties of the current
     /// <see cref="IBook"/> to be added or modified.
     /// </summary>
-    internal class BookWindowViewModel:INotifyPropertyChanged
+    public class BookWindowViewModel:INotifyPropertyChanged
     {
+
+        private IBook _book;
+
         /// <summary>
         /// The current <see cref="IBook"/>
         /// </summary>
-        public IBook Book { get; set; }
+        public IBook Book
+        {
+            get
+            {
+               return _book;
+            }
+            set
+            {
+                _book = (Book)value;
+                OnPropertyChanged(nameof(Book));
+                OnPropertyChanged(nameof(AuthorsCollection));
+            }
+        }
 
         /// <summary>
         /// Command to proceed with the add <see cref="IBook"/> process.
@@ -32,16 +48,36 @@ namespace Library.UI.ViewModels
         public RelayCommand CancelCommand => new(execute => CancelAddingBook());
 
         /// <summary>
+        /// Command to add a new Author
+        /// </summary>
+        public RelayCommand AddAuthorCommand => new(execute => AddAuthor());
+
+        /// <summary>
         /// The current UI which this ViewModel controls
         /// </summary>
         public BookWindow BookWindow;
+
+        /// <summary>
+        /// Return the list of authors of the book
+        /// </summary>
+        public ObservableCollection<IAuthor> AuthorsCollection
+        {
+            get
+            {
+                return new ObservableCollection<IAuthor>(Book.Authors.Authors);
+            }
+            set
+            {
+                OnPropertyChanged(nameof(AuthorsCollection));
+            }
+        }
 
         /// <summary>
         /// Constructor for the <see cref="BookWindowViewModel"/> class
         /// </summary>
         public BookWindowViewModel()
         {
-            Book = new Book("");
+            Book = new Book("Empty");
         }
 
         /// <summary>
@@ -65,6 +101,8 @@ namespace Library.UI.ViewModels
             IAuthorInformation authorInformation = new AuthorInformation();
             var contentAuthors = bookWindow.ItemsCtrlAuthors.ItemsSource as IEnumerable<IAuthor>;
 
+            authorInformation.InputAuthors(contentAuthors);
+
             return authorInformation;
         }
 
@@ -75,6 +113,11 @@ namespace Library.UI.ViewModels
         {
             Book = null;
             BookWindow.Close();
+        }
+        public void AddAuthor()
+        {
+            Book.Authors.Authors.Add(new Author("Perico","Los palotes"));
+            BookWindow.ItemsCtrlAuthors.ItemsSource = AuthorsCollection;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

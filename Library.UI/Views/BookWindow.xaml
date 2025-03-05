@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Library.UI.Views"
         xmlns:vm ="clr-namespace:Library.UI.ViewModels"
         mc:Ignorable="d"
-        Title="BookWindow" Height="450" Width="800">
+        Title="BookWindow" 
+        Height="450" 
+        Width="800">
 
     <Window.DataContext>
         <vm:BookWindowViewModel/>
@@ -70,25 +72,48 @@
             <!--Grid with DockPanel with Author content-->
             <Grid>
                 <DockPanel LastChildFill="True">
-                    <Label>Authors:</Label>
-                    <ItemsControl ItemsSource="{Binding Book.Authors.Authors}"
+                    <StackPanel Orientation="Vertical">
+                        <Label>Authors:</Label>
+                        <Button Name="btnAddAuthor"
+                                Content="+"
+                                Width="30"
+                                Command="{Binding AddAuthorCommand}">
+                        </Button>
+                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding AuthorsCollection}"
                                   d:ItemsSource="{d:SampleData}"
                                   Name="ItemsCtrlAuthors">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding FirstName }">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                        <TextBox Text="{Binding 
+                                            FirstName,
+                                            Mode=TwoWay, 
+                                            UpdateSourceTrigger=PropertyChanged}"
+                                            DockPanel.Dock="Left"
+                                            HorizontalAlignment="Stretch"
+                                            Grid.Column="0"
+                                            Margin="2">
                                         </TextBox>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
+
+                                        <TextBox Text="{Binding 
+                                            LastName,
+                                            Mode=TwoWay, 
+                                            UpdateSourceTrigger=PropertyChanged}"
+                                            DockPanel.Dock="Right" 
+                                            HorizontalAlignment="Stretch"
+                                            Grid.Column="1"
+                                            Margin="2">
+                                        </TextBox>
+                          
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <!--<TextBox Name="TbxAuthor"
-                             Text="{Binding Book.Author, UpdateSourceTrigger=PropertyChanged}"
-                             TextAlignment="Center"
-                             HorizontalAlignment="Stretch"
-                             VerticalContentAlignment="Center"
-                             Margin="2,2,2,2"
-                             DockPanel.Dock="Left">
-                    </TextBox>-->
                 </DockPanel>
             </Grid>
 

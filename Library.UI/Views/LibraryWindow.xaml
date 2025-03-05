@@ -41,9 +41,118 @@
             Grid.Column="1"
             Grid.Row="1"
             Name="dgrBooks"
-            d:ItemsSource="{d:SampleData}"
+            IsReadOnly="True"
+            d:ItemsSource="{d:SampleData}" 
+            SelectionMode="Single" SelectionUnit="FullRow"
             ItemsSource="{Binding Path=Library.BookCollection, 
-                            UpdateSourceTrigger=PropertyChanged}">
+                            UpdateSourceTrigger=PropertyChanged}"
+            AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+                <!--Column for Book´s name-->
+                <DataGridTemplateColumn Header="Name" 
+                                        Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label x:Name="tbxBookName" 
+                                   Background="Transparent"
+                                   Content="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--Column for Book´s ISBN-->
+                <DataGridTemplateColumn Header="ISBN" 
+                                        Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label x:Name="tbxBookISBN" 
+                                   Background="Transparent"
+                                   Content="{Binding ISBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--Column for Book´s authors-->
+                <DataGridTemplateColumn Header="Authors" 
+                                        Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+
+                            <!--Datagrid with all the authors of this Book-->
+                            <DataGrid Name="dgrAuthors"
+                                      d:ItemsSource="{d:SampleData}"
+                                      AutoGenerateColumns="False"
+                                      ItemsSource="{Binding Authors.Authors, 
+                                                    Mode=Default, 
+                                                    UpdateSourceTrigger=PropertyChanged}" SelectionUnit="FullRow"
+                                      IsReadOnly="True"
+                                      HeadersVisibility="None"
+                                      GridLinesVisibility="None"
+                                      BorderThickness="0"
+                                      Background="Transparent"
+                                      BorderBrush="Transparent"
+                            >
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <!-- When the outer row is selected, change background color -->
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="LightBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
+
+                                <DataGrid.Columns>
+                                    <!--The only column is for author´s name-->
+                                    <DataGridTemplateColumn Header="AuthorNames"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Label x:Name="tbxAuthorFirstName" 
+                                                           Background="Transparent"
+                                                           Content="{Binding FirstName, 
+                                                        Mode=TwoWay,
+                                                        UpdateSourceTrigger=PropertyChanged}" 
+                                                    />
+                                                    <Label x:Name="tbxAuthorLastName" 
+                                                           Background="Transparent"
+                                                           Content="{Binding LastName, 
+                                                           Mode=TwoWay,
+                                                           UpdateSourceTrigger=PropertyChanged}" 
+                                                    />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--Column for Book´s Comments-->
+                <DataGridTemplateColumn Header="Comments" 
+                                        Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label x:Name="tbxBookISBN" 
+                                   Background="Transparent"
+                                   Content="{Binding Description, 
+                                                            Mode=TwoWay, 
+                                                            UpdateSourceTrigger=PropertyChanged}" 
+                            />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
         </DataGrid>
 
         <!--Buttons-->

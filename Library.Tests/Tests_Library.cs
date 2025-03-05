@@ -16,22 +16,6 @@ namespace Library.Tests
         public void Setup()
         {
             Library = new Core.Models.Library("My library");
-
-            this.InsertDummyBooks();
-        }
-
-        private void InsertDummyBooks()
-        {
-            IBook? b1 = new Book("Don quijote de la mancha");
-            b1.CreateIsbnByDefault();
-            IBook? b2 = new Book("Capitalism, the unknown ideal");
-            b2.CreateIsbnByDefault();
-            IBook? b3 = new Book("Philosophy who needs it");
-            b3.CreateIsbnByDefault();
-
-            Library.InsertBook(b1);
-            Library.InsertBook(b2);
-            Library.InsertBook(b3);
         }
 
         #region Demo code

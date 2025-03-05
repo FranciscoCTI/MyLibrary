@@ -2,6 +2,8 @@
 using Library.Core.Interfaces;
 using Library.UI.ViewModels;
 using System.Windows.Controls;
+using Author = Library.Core.Models.Author;
+using Book = Library.Core.Models.Book;
 
 namespace Library.UI.Views
 {
@@ -26,7 +28,16 @@ namespace Library.UI.Views
         /// </summary>
         public void SetBookWindow()
         {
-            BookWindow = new BookWindow();
+            //BookWindowViewModel bookWindowVM = BookWindow.DataContext as BookWindowViewModel;
+
+            BookWindowViewModel bwvn = new BookWindowViewModel();
+            bwvn.Book = new Book("Sample book");
+
+            IAuthor newAuthor = new Author("Pedro", "Paramo");
+            bwvn.Book.Authors.AddNewAuthor(newAuthor);
+            bwvn.AuthorsCollection.Add(newAuthor);
+
+            BookWindow = new BookWindow(bwvn);
         }
 
         /// <summary>

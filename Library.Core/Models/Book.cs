@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml.Linq;
 using Library.Core.Enums;
 using Library.Core.Interfaces;
 using Library.Solvers;
@@ -13,9 +15,7 @@ namespace Library.Core.Models
     /// </summary>
     public class Book : IBook
     {
-        /// <summary>
-        /// The id ob the mongo object in the collection
-        /// </summary>
+        ///<inheritdoc/>
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string MongoId { get; set; }
@@ -29,9 +29,20 @@ namespace Library.Core.Models
         /// <inheritdoc />
         public string Description { get; set; }
 
+
+        private IAuthorInformation _authors;
+
         /// <inheritdoc />
         [BsonElement("Authors")]
-        public IAuthorInformation Authors { get; set; }
+        public IAuthorInformation Authors
+        {
+            get { return _authors; }
+            set
+            {
+                _authors = value;
+                OnPropertyChanged(nameof(Authors));
+            }
+        }
 
         public List<Theme> Themes { get; set; }
 
@@ -46,6 +57,13 @@ namespace Library.Core.Models
             this.Description = "-";
         }
 
+        public Book()
+        {
+            this.Name = "new authors collection";
+            this.Authors = new AuthorInformation();
+            this.Description = "-";
+        }
+
         /// <inheritdoc />
         public void CreateIsbnByDefault()
         {
@@ -53,5 +71,12 @@ namespace Library.Core.Models
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string?
+            propertyName = null)
+        {
+            PropertyChanged?.Invoke(this,
+                new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

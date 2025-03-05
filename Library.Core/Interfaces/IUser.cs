@@ -1,10 +1,12 @@
 ﻿
+using System.ComponentModel;
+
 namespace Library.Core.Interfaces
 {
     /// <summary>
     /// A human person that uses the <see cref="ILibrary"/> 
     /// </summary>
-    public interface IUser
+    public interface IUser:INotifyPropertyChanged
     {
         /// <summary>
         /// The first name of the <see cref="IUser"/>
@@ -15,6 +17,11 @@ namespace Library.Core.Interfaces
         /// The last name of the <see cref="IUser"/>
         /// </summary>
         string LastName { get; set; }
+
+        /// <summary>
+        /// Returns the complete name of this author
+        /// </summary>
+        string CompleteName { get; }
 
         /// <summary>
         /// How old is the <see cref="IUser"/>

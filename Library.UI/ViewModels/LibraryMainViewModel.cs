@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Library.Core.Interfaces;
 using Library.Core.Models;
@@ -9,6 +10,7 @@ using System.Diagnostics;
 using Library.UI.Views;
 using System.Windows.Controls;
 using Library.Core.Factories;
+using Library.Global;
 using Library.Services;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -84,9 +86,9 @@ namespace Library.UI.ViewModels
         /// <returns></returns>
         private async Task LoadElementsAsync()
         {
-            var bookListFromDB = _mongoService.GetBooksAsync();
+            var bookListFromDb = _mongoService.GetBooksAsync(MongoConstants.MongoBooksCollectionName);
 
-            var elementList = await bookListFromDB;
+            var elementList = await bookListFromDb;
             var list = elementList.ToList<IBook>();
 
             Library.BookCollection.Clear();

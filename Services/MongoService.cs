@@ -27,24 +27,34 @@ namespace Library.Services
         {
             RegisterSerializer();
             RegisterMapping();
-
-            var client = new MongoClient( MongoConstants.MongoConnectionString);
-            _dataBase = client.GetDatabase(MongoConstants.MongoDatabaseName);
-            GetCurrentCollection(MongoConstants.MongoBooksCollectionName);
         }
 
+        /// <summary>
+        /// Method to create a connection with a mongoDB collection and get all the
+        /// elements in a <see cref="IMongoCollection{Object}"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of object to get</typeparam>
+        /// <param name="collection">The name of the collection</param>
+        private IMongoCollection<T> ConnectToMongo<T>(in string collection)
+        {
+            var client = new MongoClient(MongoConstants.MongoConnectionString);
+            var db = client.GetDatabase(MongoConstants.MongoDatabaseName);
+            return db.GetCollection<T>(collection);
+        }
+
+        /// <summary>
+        /// Register a new <see cref="ObjectSerializer"/>> to the <see cref="BsonSerializer"/>>
+        /// </summary>
         private void RegisterSerializer()
         {
             var objectSerializer = new ObjectSerializer(ObjectSerializer.AllAllowedTypes);
             BsonSerializer.RegisterSerializer(objectSerializer);
         }
 
-        private void GetCurrentCollection(string collection)
-        {
-            _books = _dataBase.GetCollection<Book>(collection);
-        }
-
-        public static void RegisterMapping()
+        /// <summary>
+        /// Register classes that are going to be serialized in MongoDB
+        /// </summary>
+        private void RegisterMapping()
         {
             BsonClassMap.RegisterClassMap<AuthorInformation>(cm =>
             {
@@ -59,29 +69,57 @@ namespace Library.Services
             });
         }
 
-        public async Task<IAsyncCursor<Book>> GetBooksAsync()
+        /// <summary>
+        /// Connects to MongoDB and gets from a certain
+        /// <see cref="IMongoCollection{TDocument}"/> all the elements.
+        /// </summary>
+        /// <param name="collection">The name of the given
+        /// <see cref="IMongoCollection{TDocument}"/> in the DB that we want to get</param>
+        public async Task<List<Book>> GetBooksAsync(string collection)
         {
-            GetCurrentCollection("Books");
-            return await _books.FindAsync(_ => true);
+            _books = ConnectToMongo<Book>(collection);
+            var results = await _books.FindAsync(_ => true);
+            return results.ToList();
         }
 
+        /// <summary>
+        /// Adds a new <see cref="IBook"/>  to the current
+        /// <see cref="IMongoCollection{TDocument}"/>
+        /// </summary>
+        /// <param name="book">The <see cref="IBook"/> to be inserted on the
+        /// <see cref="IMongoCollection{TDocument}"/></param>
         public async Task AddBookAsync(Book book)
         {
+            _books = ConnectToMongo<Book>(MongoConstants.MongoBooksCollectionName);
             await _books.InsertOneAsync(book);
         }
 
+        /// <summary>
+        /// Removes a <see cref="IBook"/>  from the current
+        /// <see cref="IMongoCollection{TDocument}"/>
+        /// </summary>
+        /// <param name="isbn">The id of the <see cref="IBook"/> to be removed from the
+        /// <see cref="IMongoCollection{TDocument}"/></param>
         public async Task RemoveBookAsync(long isbn)
         {
+            _books = ConnectToMongo<Book>(MongoConstants.MongoBooksCollectionName);
             await _books.DeleteOneAsync(x => x.ISBN == isbn);
         }
 
+        /// <summary>
+        /// Updates a <see cref="IBook"/>  in the current                              
+        /// <see cref="IMongoCollection{TDocument}"/>
+        /// </summary>
+        /// <param name="isbn">The id of the <see cref="IBook"/> to be updated in the
+        /// <see cref="IMongoCollection{TDocument}"/> </param>
+        /// <param name="book">The <see cref="IBook"/> with the correct values to be
+        /// inserted on the <see cref="IMongoCollection{TDocument}"/></param>
         public async Task UpdateBookAsync(long isbn, IBook book)
         {
+            _books = ConnectToMongo<Book>(MongoConstants.MongoBooksCollectionName);
             var filter = Builders<Book>.Filter.Eq(b => b.ISBN, isbn);
-
-            GetCurrentCollection("Books");
-
-            await _books.ReplaceOneAsync(filter, (Book)book, new ReplaceOptions { IsUpsert = true });
+            await _books.ReplaceOneAsync(filter, (Book)book, 
+                                        new ReplaceOptions { IsUpsert = true });
         }
     }
 }

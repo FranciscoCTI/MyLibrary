@@ -21,7 +21,7 @@ public interface ILibrary:INotifyPropertyChanged
     /// This is used by the <see langword="WPF"/> <see cref="DataGrid"/> to show and
     /// update the content of the library.
     /// </summary>
-    public ObservableCollection<IBook> BookCollection { get;}
+    public ObservableCollection<IBook> BookCollection { get; set;}
 
     /// <summary>
     /// An instance of the class that store the this <see cref="ILibrary"/> users

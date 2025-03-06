@@ -15,8 +15,8 @@ namespace Library.Tests
         public void Setup()
         {
             Book = new Book("Don quijote de la mancha");
-            Book.CreateIsbnByDefault();
-            Book.Authors = new AuthorInformation();
+            Book.CreateMockIsbn();
+            Book.AuthorInformation = new AuthorInformation();
             Book.Description = "El ingenioso hidalgo";
         }
 

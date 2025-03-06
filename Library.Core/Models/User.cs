@@ -8,7 +8,7 @@ using Library.Core.Interfaces;
 namespace Library.Core.Models
 {
     /// <summary>
-    /// A human person that uses the <see cref="ILibrary"/> 
+    /// A human person that have access to the <see cref="ILibrary"/> 
     /// </summary>
     public class User: IUser 
     {
@@ -22,23 +22,6 @@ namespace Library.Core.Models
         public string CompleteName
         {
             get => FirstName + " " + LastName;
-            set
-            {
-                SetFirstName();
-                SetLastName();
-            }
-        }
-
-        private void SetLastName()
-        {
-            var divided = CompleteName.Split(" ");
-            LastName = divided.Last();
-        }
-
-        private void SetFirstName()
-        {
-            var divided = CompleteName.Split(" ");
-            FirstName = divided.First();
         }
 
         /// <inheritdoc />

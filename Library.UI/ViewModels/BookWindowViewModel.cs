@@ -8,6 +8,7 @@ using Library.UI.Views;
 using System.Runtime.CompilerServices;
 using Library.Core.Models;
 using System.Collections.ObjectModel;
+using Library.Core.Factories;
 
 namespace Library.UI.ViewModels
 {
@@ -48,9 +49,14 @@ namespace Library.UI.ViewModels
         public RelayCommand CancelCommand => new(execute => CancelAddingBook());
 
         /// <summary>
-        /// Command to add a new Author
+        /// Command to add a new <see cref="IAuthor"/>
         /// </summary>
         public RelayCommand AddAuthorCommand => new(execute => AddAuthor());
+
+        /// <summary>
+        /// Command to remove the last <see cref="IAuthor"/>
+        /// </summary>
+        public RelayCommand RemoveAuthorCommand => new(execute => RemoveAuthor());
 
         /// <summary>
         /// The current UI which this ViewModel controls
@@ -58,13 +64,13 @@ namespace Library.UI.ViewModels
         public BookWindow BookWindow;
 
         /// <summary>
-        /// Return the list of authors of the book
+        /// Return the list of <see cref="IAuthor"/>s of the <see cref="IBook"/>
         /// </summary>
         public ObservableCollection<IAuthor> AuthorsCollection
         {
             get
             {
-                return new ObservableCollection<IAuthor>(Book.Authors.Authors);
+                return new ObservableCollection<IAuthor>(Book.AuthorInformation.Authors);
             }
             set
             {
@@ -77,7 +83,8 @@ namespace Library.UI.ViewModels
         /// </summary>
         public BookWindowViewModel()
         {
-            Book = new Book("Empty");
+            LibraryFactory lf = new LibraryFactory();
+            Book = lf.CreateBook("Empty");
         }
 
         /// <summary>
@@ -86,37 +93,39 @@ namespace Library.UI.ViewModels
         /// </summary>
         private void ProceedAddingBook()
         {
-            if (Book != null)
-            {
-                Book.ISBN = long.Parse(BookWindow.TbxIsbn.Text);
-                Book.Name = BookWindow.TbxTitle.Text;
-                Book.Authors = GetAuthorInformation(BookWindow);
-                Book.Description = BookWindow.TbxDescription.Text;
-            }
+            BookWindow.DialogResult = true;
             BookWindow.Close();
-        }
-
-        private IAuthorInformation GetAuthorInformation(BookWindow bookWindow)
-        {
-            IAuthorInformation authorInformation = new AuthorInformation();
-            var contentAuthors = bookWindow.ItemsCtrlAuthors.ItemsSource as IEnumerable<IAuthor>;
-
-            authorInformation.InputAuthors(contentAuthors);
-
-            return authorInformation;
         }
 
         /// <summary>
-        /// Close the window to cancel the process of adding or editing a <see cref="IBook"/>
+        /// Close the window to cancel the process of adding or editing a
+        /// <see cref="IBook"/>
         /// </summary>
         private void CancelAddingBook()
         {
-            Book = null;
+            BookWindow.DialogResult = false;
             BookWindow.Close();
         }
+
+        /// <summary>
+        /// Adds a new mock <see cref="IAuthor"/> to
+        /// <see cref="Book.AuthorInformation.Authors"/>
+        /// and to the <see cref="IAuthor"/>s <see cref="ItemsControl"/>
+        /// </summary>
         public void AddAuthor()
         {
-            Book.Authors.Authors.Add(new Author("Perico","Los palotes"));
+            Book.AuthorInformation.Authors.Add(new Author("Perico","Los palotes"));
+            BookWindow.ItemsCtrlAuthors.ItemsSource = AuthorsCollection;
+        }
+
+        /// <summary>
+        /// Removes the last <see cref="IAuthor"/> from
+        /// <see cref="Book.AuthorInformation.Authors"/> and from the
+        /// <see cref="IAuthor"/>s <see cref="ItemsControl"/>
+        /// </summary>
+        public void RemoveAuthor()
+        {
+            Book.RemoveLastAuthor();
             BookWindow.ItemsCtrlAuthors.ItemsSource = AuthorsCollection;
         }
 

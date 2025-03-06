@@ -7,18 +7,17 @@ using Library.UI.Commands;
 using System.ComponentModel;
 using System.Diagnostics;
 using Library.UI.Views;
-using Services;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using Library.Infrastructure.Services;
+using Library.Core.Factories;
+using Library.Services;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Library.UI.ViewModels
 {
     /// <summary>
-    /// ViewModel for the <see cref="ILibrary"/>> UI. Which shows the <see cref="IBook"/>s
-    /// of the current <see cref="ILibrary"/>.
+    /// ViewModel for the <see cref="ILibrary"/>> UI. Which shows the
+    /// <see cref="IBook"/>s of the current <see cref="ILibrary"/>.
     /// </summary>
     internal class LibraryMainViewModel:INotifyPropertyChanged
     {
@@ -44,19 +43,23 @@ namespace Library.UI.ViewModels
         /// </summary>
         public ILibrary Library { get; set; }
 
-        public string LibraryName => $"This are the books on {Library.Name}";
+        public string LibraryName => $"These are the books on {Library.Name}";
 
         /// <summary>
         /// The current <see cref="MainWindow"/> UI
         /// </summary>
-        public Views.LibraryWindow MainWindow { get; set; }
+        public LibraryWindow MainWindow { get; set; }
 
         /// <summary>
-        /// Store the current <see cref="Library.Infrastructure.Services.ExceptionManager"/>.
+        /// Store the current <see cref="Services.ExceptionManager"/>.
         /// Which manages the exceptions and logs them in a persistent record.
         /// </summary>
         private ExceptionManager ExceptionManager { get;}
 
+
+        /// <summary>
+        /// Manage all the MongoDB processes
+        /// </summary>
         private readonly MongoService _mongoService;
 
 
@@ -65,7 +68,8 @@ namespace Library.UI.ViewModels
         /// </summary>
         public LibraryMainViewModel()
         {
-            Library = new Core.Models.Library("Mi biblioteca");
+            LibraryFactory libraryFactory = new LibraryFactory();
+            Library = libraryFactory.CreateLibrary("Mi biblioteca");
 
             ExceptionManager = new ExceptionManager();
 
@@ -74,17 +78,16 @@ namespace Library.UI.ViewModels
             _ = LoadElementsAsync();
         }
 
+        /// <summary>
+        /// Load the current state of the <see cref="ILibrary"/> database
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadElementsAsync()
         {
             var bookListFromDB = _mongoService.GetBooksAsync();
 
             var elementList = await bookListFromDB;
             var list = elementList.ToList<IBook>();
-
-            foreach (var book in list)
-            {
-                Debug.WriteLine(book.ToJson());
-            }
 
             Library.BookCollection.Clear();
 
@@ -99,7 +102,7 @@ namespace Library.UI.ViewModels
         /// information of a <see cref="IBook"/>. Then on pressed "Accept", the
         /// <see cref="IBook"/> is inserted into the current <see cref="ILibrary"/>
         /// If there is any error during the process the
-        /// <see cref="Library.Infrastructure.Services.ExceptionManager"/> Handles it.
+        /// <see cref="Services.ExceptionManager"/> Handles it.
         /// </summary>
         private async void AddBook()
         {
@@ -123,6 +126,11 @@ namespace Library.UI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Adds a new <see cref="IBook"/>> to the library.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
         private async Task AddBookAsync(IBook book)
         {
             await _mongoService.AddBookAsync((Book)book);
@@ -131,7 +139,7 @@ namespace Library.UI.ViewModels
         /// <summary>
         /// Removes the <see cref="IBook"/> selected on the <see cref="DataGrid"/>
         /// from the current <see cref="ILibrary"/>. If there is any error during
-        /// the process the <see cref="Library.Infrastructure.Services.ExceptionManager"/>
+        /// the process the <see cref="Services.ExceptionManager"/>
         /// handles it.
         /// </summary>
         private async void RemoveBook()
@@ -152,11 +160,20 @@ namespace Library.UI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Remove a <see cref="IBook"/> from the DB, by its ISBN
+        /// </summary>
+        /// <param name="isbn">The ISBN of the <see cref="IBook"/> to remove</param>
         private async Task RemoveBookAsync(long isbn)
         {
             await _mongoService.RemoveBookAsync(isbn);
         }
 
+        /// <summary>
+        /// Update a <see cref="IBook"/> from the DB, by its ISBN and the new <see cref="IBook"/> element.
+        /// </summary>
+        /// <param name="isbn">The ISBN of the <see cref="IBook"/> to remove</param>
+        /// <param name="bookToUpdate">The  <see cref="IBook"/> with the updated values</param>
         private async Task UpdateBookAsync(long isbn, IBook bookToUpdate)
         {
             await _mongoService.UpdateBookAsync(isbn, bookToUpdate);
@@ -167,7 +184,7 @@ namespace Library.UI.ViewModels
         /// Launch a <see cref="BookWindow"/> form to change the data.
         /// When pressed "Accept" the <see cref="IBook"/> is updated in the
         /// <see cref="ILibrary"/>. If there is any error during
-        /// the process the <see cref="Library.Infrastructure.Services.ExceptionManager"/>
+        /// the process the <see cref="Services.ExceptionManager"/>
         /// handles it.
         /// </summary>
         private async void EditBook()
@@ -187,9 +204,12 @@ namespace Library.UI.ViewModels
                     bookWindow.SetBook(toBeEdited);
                     bookWindow.ShowDialog();
 
-                    await UpdateBookAsync(isbn, toBeEdited);
+                    if (bookWindow.DialogResult== true)
+                    {
+                        await UpdateBookAsync(isbn, toBeEdited);
 
-                    _ = LoadElementsAsync();
+                        _ = LoadElementsAsync();
+                    }
                 }
             }
             catch (Exception e)
@@ -198,6 +218,10 @@ namespace Library.UI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets the selected  <see cref="IBook"/> from the GridView
+        /// </summary>
+        /// <returns></returns>
         public IBook? GetSelectedItem()
         {
             return MainWindow.GetSelectedItem();

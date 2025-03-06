@@ -42,7 +42,7 @@ namespace Library.Tests
         public void Library_InsertBook()
         {
             IBook? book = new Book("The brothers Karamazov");
-            book.CreateIsbnByDefault();
+            book.CreateMockIsbn();
             Library.InsertBook(book);
 
             Assert.That(Library.Books.ContainsKey(book.ISBN));
@@ -52,7 +52,7 @@ namespace Library.Tests
         public void Library_RemoveBook()
         {
             Book? b = new Book("Un mundo feliz");
-            b.CreateIsbnByDefault();
+            b.CreateMockIsbn();
 
             Library.InsertBook(b);
             Library.RemoveBook(b.ISBN);

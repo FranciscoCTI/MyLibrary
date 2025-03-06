@@ -44,17 +44,18 @@ namespace Library.Core.Models
         [BsonElement("Address")]
         public IAddress Address { get; set; }
 
+        /// <summary>
+        /// Constructor for creating an <see cref="Author"/> with first name and lastname
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
         public Author(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
         }
 
-        public Author()
-        {
-
-        }
-
+        /// <inheritdoc/>
         public bool Validate()
         {
             return FirstName != "" && LastName != "";

@@ -11,7 +11,7 @@ namespace TestConsole
             Console.WriteLine("Creating a new Library");
 
             LibraryFactory lf = new LibraryFactory();
-            ILibrary library= lf.CreateLibrary();
+            ILibrary library= lf.CreateLibrary("La biblioteca de mi casa");
 
             Console.WriteLine("The name of this library is {0}",library.Name);
 
@@ -32,7 +32,7 @@ namespace TestConsole
 
                 IBook? newBook = lf.CreateBook(realBookName);
 
-                newBook.CreateIsbnByDefault();
+                newBook.CreateMockIsbn();
 
                 library.InsertBook(newBook);
                 Console.WriteLine("Book: {0} inserted, its ISBN is {1}", newBook.Name, newBook.ISBN);

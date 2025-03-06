@@ -26,13 +26,12 @@ namespace Library.Core.Interfaces
         /// <summary>
         /// Get you the owner of the <see cref="ILibrary"/>
         /// </summary>
-        /// <returns></returns>
         public IUser GetOwner();
 
         /// <summary>
-        /// Sets the index of the <see cref="IUser"/>> that is the owner of the <see cref="ILibrary"/>
+        /// Set the index of the <see cref="IUser"/> that is the main <see cref="IUser"/> of the <see cref="ILibrary"/>
         /// </summary>
-        /// <param name="newOwner">The index of the new owner</param>
+        /// <param name="newOwner">The index of the main <see cref="IUser"/>, in the <see cref="Users"/>> List</param>
         void SetOwner(int newOwner);
     }
 }

@@ -28,7 +28,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Tests", "Library.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Global", "Library.Global\Library.Global.csproj", "{3B23DEF0-3955-41E5-BC7A-2451F061BF71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{C4A26363-9B3E-4B96-9BAD-F6729451B0DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Services", "Services\Library.Services.csproj", "{C4A26363-9B3E-4B96-9BAD-F6729451B0DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{99FA046A-DD23-4355-B123-C0A695F00611}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

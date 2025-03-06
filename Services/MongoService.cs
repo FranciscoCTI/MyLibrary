@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Library.Core.Interfaces;
 using Library.Core.Models;
@@ -9,23 +10,33 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 
-namespace Services
+namespace Library.Services
 {
+    /// <summary>
+    /// Handle all the connections with MongoDB
+    /// </summary>
     public class MongoService
     {
         private IMongoCollection<Book> _books;
         private IMongoDatabase _dataBase;
+        
+        /// <summary>
+        /// Constructor initialize the process.
+        /// </summary>
         public MongoService()
+        {
+            RegisterSerializer();
+            RegisterMapping();
+
+            var client = new MongoClient( MongoConstants.MongoConnectionString);
+            _dataBase = client.GetDatabase(MongoConstants.MongoDatabaseName);
+            GetCurrentCollection(MongoConstants.MongoBooksCollectionName);
+        }
+
+        private void RegisterSerializer()
         {
             var objectSerializer = new ObjectSerializer(ObjectSerializer.AllAllowedTypes);
             BsonSerializer.RegisterSerializer(objectSerializer);
-
-            RegisterMapping();
-
-            var client = new MongoClient( ApplicationConstants.MongoConnectionString);
-            _dataBase = client.GetDatabase("Library");
-            GetCurrentCollection("Books");
-
         }
 
         private void GetCurrentCollection(string collection)
@@ -70,8 +81,7 @@ namespace Services
 
             GetCurrentCollection("Books");
 
-            await _books.DeleteOneAsync(filter);
-            await _books.InsertOneAsync((Book)book);
+            await _books.ReplaceOneAsync(filter, (Book)book, new ReplaceOptions { IsUpsert = true });
         }
     }
 }

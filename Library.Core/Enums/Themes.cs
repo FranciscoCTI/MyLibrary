@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library.Core.Enums
 {
+    /// <summary>
+    /// Theses are the different main topics that a book can have
+    /// </summary>
         public enum Theme
         {
             Architecture,

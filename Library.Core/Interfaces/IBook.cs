@@ -20,9 +20,10 @@ namespace Library.Core.Interfaces
         public string MongoId { get; set; }
 
         /// <summary>
-        /// The international code for this <see cref="IBook"/> (International Standard Book
-        /// Number).
-        /// A 13-digit unique number that identify every physical or digital <see cref="IBook"/>.
+        /// The international code for this <see cref="IBook"/> (International Standard
+        /// Book Number).
+        /// A 13-digit unique number that identify every physical or digital
+        /// <see cref="IBook"/>.
         /// </summary>
         long ISBN { get; set; }
 
@@ -32,21 +33,32 @@ namespace Library.Core.Interfaces
         string Name { get; set; }
 
         /// <summary>
-        /// A short description of the <see cref="IBook"/>. It could be the paragraph in the back cover.
+        /// A short description of the <see cref="IBook"/>. It could be the paragraph
+        /// in the back cover.
         /// </summary>
         string Description { get; set; }
 
         /// <summary>
-        /// The creators of the <see cref="IBook"/>.
+        /// Information about the creators of the <see cref="IBook"/>.
         /// </summary>
         [BsonElement("Authors")]
-        IAuthorInformation Authors { get; set; }
+        IAuthorInformation AuthorInformation { get; set; }
 
+        /// <summary>
+        /// List of <see cref="Theme"/>s in which we categorize this book
+        /// </summary>
         List<Theme> Themes { get; set; }
 
         /// <summary>
-        /// Automatically creates a new ISBN, this is not a real ISBN (since it´s not calculated with the real algorithm), only a placeholder value.
+        /// Automatically creates a new ISBN, this is not a real ISBN (since it´s not
+        /// calculated with the real algorithm), only a placeholder value.
         /// </summary>
-        void CreateIsbnByDefault();
+        void CreateMockIsbn();
+
+        /// <summary>
+        ///Removes the last author in the <see cref="IAuthorInformation"/> list
+        /// </summary>
+        /// <returns></returns>
+        void RemoveLastAuthor();
     }
 }

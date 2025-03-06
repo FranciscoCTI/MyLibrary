@@ -1,7 +1,6 @@
 ﻿using Library.Core.Interfaces;
-using Services;
 
-namespace Library.Infrastructure.Services
+namespace Library.Services
 {
     /// <summary>
     /// Handle the exceptions on the system. Requires a Logger to store them
@@ -14,7 +13,6 @@ namespace Library.Infrastructure.Services
         /// <summary>
         /// Main constructor for the <see cref="ExceptionManager"/>
         /// </summary>
-        /// <param name="logger"></param>
         public ExceptionManager()
         {
             _logger = Logger.Instance;

@@ -16,6 +16,9 @@ namespace Library.UI.Views
         private LibraryMainViewModel _viewModel;
         public BookWindow BookWindow;
 
+        /// <summary>
+        /// Constructor for <see cref="LibraryWindow"/>
+        /// </summary>
         public LibraryWindow()
         {
             InitializeComponent();
@@ -24,20 +27,11 @@ namespace Library.UI.Views
         }
 
         /// <summary>
-        /// Creates a new <see cref="Library.UI.Views.BookWindow"/> and define it in the <see cref="BookWindow"/> field
+        /// Creates a new <see cref="Views.BookWindow"/> and define it in the <see cref="BookWindow"/> field
         /// </summary>
         public void SetBookWindow()
         {
-            //BookWindowViewModel bookWindowVM = BookWindow.DataContext as BookWindowViewModel;
-
-            BookWindowViewModel bwvn = new BookWindowViewModel();
-            bwvn.Book = new Book("Sample book");
-
-            IAuthor newAuthor = new Author("Pedro", "Paramo");
-            bwvn.Book.Authors.AddNewAuthor(newAuthor);
-            bwvn.AuthorsCollection.Add(newAuthor);
-
-            BookWindow = new BookWindow(bwvn);
+            BookWindow = new BookWindow();
         }
 
         /// <summary>

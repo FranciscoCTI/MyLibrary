@@ -12,7 +12,8 @@ namespace Library.Core.Interfaces
     public interface ILogger
     {
         /// <summary>
-        /// Returns the singleton instance of the <see cref="ILogger"/>.
+        /// If <see cref="_instance"/> is null, creates a singleton instance of this
+        /// class, then return this instance.
         /// </summary>
         public static ILogger? Instance;
 

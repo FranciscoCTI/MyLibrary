@@ -15,18 +15,15 @@ namespace Library.UI.Views
     public partial class BookWindow : Window
     {
         private BookWindowViewModel _viewModel;
+
+        /// <summary>
+        /// Constructor for <see cref="BookWindow"/>, using a ViewModel
+        /// </summary>
+        /// <param name="bwvn">The ViewModel for this window</param>
         public BookWindow()
         {
             InitializeComponent();
 
-            _viewModel = this.DataContext as BookWindowViewModel;
-            _viewModel.BookWindow = this;
-        }
-        public BookWindow(BookWindowViewModel bwvn)
-        {
-            InitializeComponent();
-
-            this.DataContext = bwvn;
             _viewModel = this.DataContext as BookWindowViewModel;
             _viewModel.BookWindow = this;
         }

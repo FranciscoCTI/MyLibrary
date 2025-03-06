@@ -14,6 +14,7 @@
         <vm:BookWindowViewModel/>
     </Window.DataContext>
 
+    <!--Overall grid the form-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -33,7 +34,7 @@
             FontWeight="Bold"
         >Book information</Label>
 
-        <!--StackPanel with all the form-->
+        <!--StackPanel with all the book information-->
         <StackPanel Grid.Column="1"
                     Grid.Row ="1" 
                     Orientation="Vertical">
@@ -74,11 +75,15 @@
                 <DockPanel LastChildFill="True">
                     <StackPanel Orientation="Vertical">
                         <Label>Authors:</Label>
+
+                        <!--Button to add a new User-->
                         <Button Name="btnAddAuthor"
                                 Content="+"
                                 Width="30"
                                 Command="{Binding AddAuthorCommand}">
                         </Button>
+
+                        <!--Button to remove the last User-->
                         <Button Name="btnRemoveAuthor"
                                 Content="-"
                                 Width="30"
@@ -86,6 +91,8 @@
                                 Margin="0,5,0,0">
                         </Button>
                     </StackPanel>
+
+                    <!--ItemsControl with all the users-->
                     <ItemsControl ItemsSource="{Binding AuthorsCollection}"
                                   d:ItemsSource="{d:SampleData}"
                                   Name="ItemsCtrlAuthors"
@@ -147,19 +154,23 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                        <!--Button to accept-->
                         <Button Name="BtnAccept" 
                                 HorizontalAlignment="Stretch"
                                 DockPanel.Dock="Left" 
                                 Margin="0,0,5,0"
                                 Height="50"
-                                Command="{Binding ProceedCommand}">Accept</Button>
+                                Command="{Binding ProceedCommand}">Accept
+                        </Button>
+                        <!--Button to cancel-->
                         <Button Grid.Column="1" 
                                 Name="BtnCancel" 
                                 Margin="5,0,0,0"
                                 DockPanel.Dock="Right"
                                 HorizontalAlignment="Stretch"
                                 Command="{Binding CancelCommand}"
-                                Height="50">Cancel</Button>
+                                Height="50">Cancel
+                        </Button>
                     </Grid>
             </DockPanel>
         </StackPanel>

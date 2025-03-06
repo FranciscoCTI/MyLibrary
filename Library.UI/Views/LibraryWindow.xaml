@@ -14,6 +14,7 @@
         <vm:LibraryMainViewModel/>
     </Window.DataContext>
 
+    <!--Overall grid for the form-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -48,7 +49,9 @@
                             UpdateSourceTrigger=PropertyChanged}"
             AutoGenerateColumns="False">
 
+            <!--The grid columns-->
             <DataGrid.Columns>
+
                 <!--Column for Book´s name-->
                 <DataGridTemplateColumn Header="Name" 
                                         Width="*">
@@ -85,7 +88,7 @@
                             <DataGrid Name="dgrAuthors"
                                       d:ItemsSource="{d:SampleData}"
                                       AutoGenerateColumns="False"
-                                      ItemsSource="{Binding Authors.Authors, 
+                                      ItemsSource="{Binding AuthorInformation.Authors, 
                                                     Mode=Default, 
                                                     UpdateSourceTrigger=PropertyChanged}" SelectionUnit="FullRow"
                                       IsReadOnly="True"

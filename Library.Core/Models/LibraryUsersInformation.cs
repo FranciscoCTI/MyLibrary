@@ -25,6 +25,7 @@ namespace Library.Core.Models
             return Users[Owner];
         }
 
+        /// <inheritdoc/>
         public void SetOwner(int newOwner)
         {
             this.Owner = newOwner;

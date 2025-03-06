@@ -29,21 +29,21 @@ namespace Library.Core.Models
         /// <inheritdoc />
         public string Description { get; set; }
 
-
         private IAuthorInformation _authors;
 
         /// <inheritdoc />
         [BsonElement("Authors")]
-        public IAuthorInformation Authors
+        public IAuthorInformation AuthorInformation
         {
             get { return _authors; }
             set
             {
                 _authors = value;
-                OnPropertyChanged(nameof(Authors));
+                OnPropertyChanged(nameof(AuthorInformation));
             }
         }
 
+        /// <inheritdoc />
         public List<Theme> Themes { get; set; }
 
         /// <summary>
@@ -53,21 +53,34 @@ namespace Library.Core.Models
         public Book(string name)
         {
             this.Name = name;
-            this.Authors = new AuthorInformation();
+            this.AuthorInformation = new AuthorInformation();
             this.Description = "-";
         }
 
+        /// <summary>
+        /// Parameterless constructor, I think is needed for deserialize with MongoDB
+        /// </summary>
         public Book()
         {
             this.Name = "new authors collection";
-            this.Authors = new AuthorInformation();
+            this.AuthorInformation = new AuthorInformation();
             this.Description = "-";
         }
 
         /// <inheritdoc />
-        public void CreateIsbnByDefault()
+        public void CreateMockIsbn()
         {
             ISBN = (int)NumberGenerator.GetRandom13DigitNumber();
+        }
+
+        /// <inheritdoc />
+        public void RemoveLastAuthor()
+        {
+            if (AuthorInformation.AnyAuthor())
+            {
+                IAuthor lastAuthor = AuthorInformation.Authors.Last();
+                AuthorInformation.Authors.Remove(lastAuthor);
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

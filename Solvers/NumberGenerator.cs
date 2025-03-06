@@ -1,7 +1,7 @@
 ﻿namespace Library.Solvers
 {
     /// <summary>
-    /// Methods for generating useful numbers during development
+    /// Methods for generating useful numerical data during development
     /// </summary>
     public class NumberGenerator
     {

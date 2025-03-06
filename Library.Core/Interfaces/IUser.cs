@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace Library.Core.Interfaces
 {
     /// <summary>
-    /// A human person that uses the <see cref="ILibrary"/> 
+    /// A human person that have access to the <see cref="ILibrary"/> 
     /// </summary>
     public interface IUser:INotifyPropertyChanged
     {

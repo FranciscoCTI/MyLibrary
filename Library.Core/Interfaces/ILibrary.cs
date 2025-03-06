@@ -24,9 +24,9 @@ public interface ILibrary:INotifyPropertyChanged
     public ObservableCollection<IBook> BookCollection { get;}
 
     /// <summary>
-    /// An instance of the class that store the this <see cref="ILibrary"/> users information,
-    /// contains the <see cref="ILibraryUsersInformation.Owner"/> and the list of
-    /// <see cref="ILibraryUsersInformation.Users"/>.
+    /// An instance of the class that store the this <see cref="ILibrary"/> users
+    /// information, contains the <see cref="ILibraryUsersInformation.Owner"/> and the
+    /// list of <see cref="ILibraryUsersInformation.Users"/>.
     /// </summary>
     public ILibraryUsersInformation UsersInformation { get; }
 
@@ -38,8 +38,8 @@ public interface ILibrary:INotifyPropertyChanged
     /// <summary>
     /// Inserts a new <see cref="IBook"/> in the library 
     /// </summary>
-    /// <param name="bookToInsert">The instance of <see cref="IBook"/> to be inserted on the
-    /// <see cref="ILibrary"/> collection</param>
+    /// <param name="bookToInsert">The instance of <see cref="IBook"/> to be inserted on
+    /// the<see cref="ILibrary"/> collection</param>
     void InsertBook(IBook bookToInsert);
 
     /// <summary>

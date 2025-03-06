@@ -5,23 +5,26 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Library.Core.Interfaces;
+using Library.Global;
 
-namespace Services
+namespace Library.Services
 {
     /// <summary>
-    /// Responsable for registering the exceptions thrown by the system
+    /// Register the exceptions thrown by the system in a defined way and location
     /// </summary>
     public class Logger: ILogger
     {
-        private static readonly string _clientFolderName = "Library";
+        private static readonly string ClientFolderName = MongoConstants.MongoDatabaseName;
 
         private static readonly object Lock = new object();
         private static ILogger? _instance;
-
-        private readonly string _logFileExtension = "_log.txt";
+        private readonly string _logFileExtension = LoggingConstants.LogFileDenomination;
         private readonly string _logDirectory;
 
-        ///<inheritdoc />
+        /// <summary>
+        /// If <see cref="_instance"/>> is null, creates a singleton instance of this
+        /// class, then return this instance.
+        /// </summary>
         public static ILogger? Instance
         {
             get
@@ -64,14 +67,12 @@ namespace Services
 
             var result = Regex.Replace(tempPath, pattern, "").Trim('\\');
 
-            var logDirectory = $"{result}\\{_clientFolderName}\\";
+            var logDirectory = $"{result}\\{ClientFolderName}\\";
 
             return logDirectory;
         }
 
-        /// <summary>
         /// <inheritdoc />
-        /// </summary>
         public void Log(string message)
         {
             var dateTime = DateTime.Now;

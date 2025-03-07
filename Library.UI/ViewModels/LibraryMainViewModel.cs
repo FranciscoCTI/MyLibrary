@@ -66,18 +66,47 @@ namespace Library.UI.ViewModels
         /// </summary>
         private readonly MongoService _mongoService;
 
-        private string _bookFilterString = string.Empty;
+        private string _bookNameFilterString = string.Empty;
+        private string _bookIsbnFilterString = string.Empty;
+        private string _bookDescriptionFilterString = string.Empty;
 
-        public string BookFilterString
+        public string BookNameFilterString
         {
             get
             {
-                return _bookFilterString;
+                return _bookNameFilterString;
             }
             set
             {
-                _bookFilterString = value;
-                OnPropertyChanged(nameof(BookFilterString));
+                _bookNameFilterString = value;
+                OnPropertyChanged(nameof(BookNameFilterString));
+                UpdateDgrBooks();
+            }
+        }
+
+        public string BookIsbnFilterString
+        {
+            get
+            {
+                return _bookIsbnFilterString;
+            }
+            set
+            {
+                _bookIsbnFilterString = value;
+                OnPropertyChanged(nameof(BookIsbnFilterString));
+                UpdateDgrBooks();
+            }
+        }
+        public string BookDescriptionFilterString
+        {
+            get
+            {
+                return _bookDescriptionFilterString;
+            }
+            set
+            {
+                _bookDescriptionFilterString = value;
+                OnPropertyChanged(nameof(BookDescriptionFilterString));
                 UpdateDgrBooks();
             }
         }

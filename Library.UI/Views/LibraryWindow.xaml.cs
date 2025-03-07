@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using Author = Library.Core.Models.Author;
 using Book = Library.Core.Models.Book;
 using System.Windows.Data;
+using Library.Core.Models;
 
 namespace Library.UI.Views
 {
@@ -31,7 +32,7 @@ namespace Library.UI.Views
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-           UpdateDgrBooks();
+            UpdateDgrBooks();
         }
 
         public void UpdateDgrBooks()
@@ -75,8 +76,13 @@ namespace Library.UI.Views
         {
             IBook book = e.Item as IBook;
 
-            if (book.Name.Contains(_viewModel.BookFilterString, StringComparison.InvariantCultureIgnoreCase) 
-                || _viewModel.BookFilterString == "")
+            bool nameResult = NameFiltered(book.Name);
+            bool isbnResult = IsbnFiltered(book.ISBN);
+            bool descriptionResult = DescriptionFiltered(book.Description);
+
+            if (
+                nameResult && isbnResult && descriptionResult
+                )
             {
                 e.Accepted = true;
             }
@@ -84,6 +90,33 @@ namespace Library.UI.Views
             {
                 e.Accepted = false;
             }
+        }
+        private bool NameFiltered(string name)
+        {
+            if (name.Contains(_viewModel.BookNameFilterString, StringComparison.InvariantCultureIgnoreCase) || _viewModel.BookNameFilterString == "")
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool IsbnFiltered(long isbn)
+        {
+            string isbnToString = isbn.ToString();
+
+            if (isbnToString.Contains(_viewModel.BookIsbnFilterString) || _viewModel.BookIsbnFilterString =="")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool DescriptionFiltered(string comment)
+        {
+            if (comment.Contains(_viewModel.BookDescriptionFilterString, StringComparison.InvariantCultureIgnoreCase) || _viewModel.BookDescriptionFilterString == "")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

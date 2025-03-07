@@ -77,7 +77,7 @@
                                  Grid.Column="0"
                                  HorizontalAlignment="Stretch"
                                  Margin="2"
-                                 Text="{Binding BookFilterString, 
+                                 Text="{Binding BookNameFilterString, 
                                  Mode=OneWayToSource,
                                  UpdateSourceTrigger=PropertyChanged}">
                         </TextBox>
@@ -85,12 +85,17 @@
                         <TextBox Grid.Column="1" 
                                  Name="TbxFilterISBN"
                                  HorizontalAlignment="Stretch"
-                                 Margin="2"></TextBox>
+                                 Margin="2"
+                                 Text="{Binding BookIsbnFilterString, 
+                                 Mode=OneWayToSource,
+                                 UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
 
                         <TextBox Grid.Column="2"
                                  Name="TbxFilterAuthors"
                                  HorizontalAlignment="Stretch"
-                                 Margin="2"></TextBox>
+                                 Margin="2">
+                        </TextBox>
 
                         <TextBox Grid.Column="3"
                                  Name="TbxFilterThemes"
@@ -100,7 +105,11 @@
                         <TextBox Grid.Column="4"
                                  Name="TbxFilterComments"
                                  HorizontalAlignment="Stretch"
-                                 Margin="2"></TextBox>
+                                 Margin="2"
+                                 Text="{Binding BookDescriptionFilterString,
+                                 Mode =OneWayToSource, 
+                                 UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
                     </Grid>
             </DockPanel>
 
@@ -262,8 +271,8 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <!--Column for Book´s Comments-->
-                <DataGridTemplateColumn Header="Comments" 
+                <!--Column for Book´s descríption-->
+                <DataGridTemplateColumn Header="Description" 
                                         Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Library.UI"
         xmlns:converters="clr-namespace:Library.UI.Converters"
         xmlns:vm ="clr-namespace:Library.UI.ViewModels"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="Library" 
         Height="600" 
@@ -20,6 +21,13 @@
             <CollectionViewSource x:Key="CvsLibrosFiltrados" 
                                       Source="{Binding Library.BookCollection}"
                                       Filter="Cvs_Filter_Name">
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="Name"/>
+                </CollectionViewSource.GroupDescriptions>
+                <CollectionViewSource.SortDescriptions>
+                    <componentModel:SortDescription PropertyName="ISBN" 
+                                                    Direction="Descending"/>
+                </CollectionViewSource.SortDescriptions>
             </CollectionViewSource>
         </ResourceDictionary>
     </Window.Resources>

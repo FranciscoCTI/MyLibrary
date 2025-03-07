@@ -58,40 +58,51 @@
                         UpdateSourceTrigger=PropertyChanged}"
             ></Label>
 
-        <StackPanel Grid.Column="1"
-                            Grid.Row="2" Orientation="Horizontal">
-            <Label Margin="0,0,15,0">Filters:</Label>
-            <Grid>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="0,0,-819,0">
-                    <TextBox Name="TbxFilterName" 
-                                     HorizontalAlignment="Stretch"
-                                     Margin="2"
-                                     DockPanel.Dock="Left"
-                                     Width="160"
-                                     Text="{Binding BookFilter, 
-                                            Mode=OneWayToSource,
-                                            UpdateSourceTrigger=PropertyChanged}">
-                    </TextBox>
-                    <TextBox Name="TbxFilterISBN"
-                                     HorizontalAlignment="Stretch"
-                                     Margin="2"
-                                     DockPanel.Dock="Left"
-                                     Width="160"></TextBox>
-                    <TextBox Name="TbxFilterAuthors"
-                                     HorizontalAlignment="Stretch"
-                                     Margin="2"
-                                     Width="160"></TextBox>
-                    <TextBox Name="TbxFilterThemes"
-                                     HorizontalAlignment="Stretch"
-                                     Margin="2"
-                                     Width="160"></TextBox>
-                    <TextBox Name="TbxFilterComments"
-                                     HorizontalAlignment="Stretch"
-                                     Margin="2"
-                                     Width="160"></TextBox>
-                </StackPanel>
-            </Grid>
-        </StackPanel>
+        <!--Filter content-->
+            <DockPanel Grid.Row="2" 
+                       Grid.Column="1" 
+                       LastChildFill="True">
+                <Label Margin="0,0,20,0">Filters:</Label>
+                <Grid DockPanel.Dock="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+
+                        <TextBox Name="TbxFilterName" 
+                                 Grid.Column="0"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"
+                                 Text="{Binding BookFilterString, 
+                                 Mode=OneWayToSource,
+                                 UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
+
+                        <TextBox Grid.Column="1" 
+                                 Name="TbxFilterISBN"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"></TextBox>
+
+                        <TextBox Grid.Column="2"
+                                 Name="TbxFilterAuthors"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"></TextBox>
+
+                        <TextBox Grid.Column="3"
+                                 Name="TbxFilterThemes"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"></TextBox>
+
+                        <TextBox Grid.Column="4"
+                                 Name="TbxFilterComments"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"></TextBox>
+                    </Grid>
+            </DockPanel>
 
         <!--Datagrid that shows all the books from the Library-->
         <DataGrid

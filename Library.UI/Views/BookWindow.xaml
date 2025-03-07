@@ -210,15 +210,15 @@
                                 Command="{Binding ProceedCommand}">Accept
                         </Button>
                         <!--Button to cancel-->
-                        <Button Grid.Column="1" 
+                    <Button Grid.Column="1" 
                                 Name="BtnCancel" 
                                 Margin="5,0,0,0"
                                 DockPanel.Dock="Right"
                                 HorizontalAlignment="Stretch"
                                 Command="{Binding CancelCommand}"
                                 Height="50">Cancel
-                        </Button>
-                    </Grid>
+                    </Button>
+                </Grid>
             </DockPanel>
         </StackPanel>
     </Grid>

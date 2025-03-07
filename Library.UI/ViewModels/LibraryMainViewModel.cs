@@ -66,18 +66,18 @@ namespace Library.UI.ViewModels
         /// </summary>
         private readonly MongoService _mongoService;
 
-        private string _bookFilter = string.Empty;
+        private string _bookFilterString = string.Empty;
 
-        public string BookFilter
+        public string BookFilterString
         {
             get
             {
-                return _bookFilter;
+                return _bookFilterString;
             }
             set
             {
-                _bookFilter = value;
-                OnPropertyChanged(nameof(BookFilter));
+                _bookFilterString = value;
+                OnPropertyChanged(nameof(BookFilterString));
                 UpdateDgrBooks();
             }
         }

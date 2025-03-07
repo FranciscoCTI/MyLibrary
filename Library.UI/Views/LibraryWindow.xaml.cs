@@ -75,8 +75,8 @@ namespace Library.UI.Views
         {
             IBook book = e.Item as IBook;
 
-            if (book.Name.Contains(_viewModel.BookFilter, StringComparison.InvariantCultureIgnoreCase) 
-                || _viewModel.BookFilter == "")
+            if (book.Name.Contains(_viewModel.BookFilterString, StringComparison.InvariantCultureIgnoreCase) 
+                || _viewModel.BookFilterString == "")
             {
                 e.Accepted = true;
             }

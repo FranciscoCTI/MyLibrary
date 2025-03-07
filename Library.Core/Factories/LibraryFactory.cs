@@ -1,4 +1,5 @@
 ﻿using System;
+using Library.Core.Enums;
 using Library.Core.Interfaces;
 using Library.Core.Models;
 using Library.Solvers;
@@ -31,6 +32,10 @@ namespace Library.Core.Factories
             book.ISBN = NumberGenerator.GetRandom13DigitNumber();
             book.Description = "Description for this book";
             book.AuthorInformation = new AuthorInformation();
+            
+            book.Themes.Add(Theme.Architecture);
+            book.Themes.Add(Theme.Art);
+            book.Themes.Add(Theme.Philosophy);
 
             return book;
         }

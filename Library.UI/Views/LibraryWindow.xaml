@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library.UI"
+        xmlns:converters="clr-namespace:Library.UI.Converters"
         xmlns:vm ="clr-namespace:Library.UI.ViewModels"
         mc:Ignorable="d"
         Title="Library" 
@@ -13,6 +14,10 @@
     <Window.DataContext>
         <vm:LibraryMainViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <converters:ThemeConverter x:Key="ThemeConverter"/>
+    </Window.Resources>
 
     <!--Overall grid for the form-->
     <Grid>
@@ -130,6 +135,59 @@
                                                            UpdateSourceTrigger=PropertyChanged}" 
                                                     />
                                                 </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--Column for Book´s themes-->
+                <DataGridTemplateColumn Header="Themes" 
+                        Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+
+                            <!--Datagrid with all the themes of this Book-->
+                            <DataGrid Name="dgrThemes"
+                                    d:ItemsSource="{d:SampleData}"
+                                    AutoGenerateColumns="false"
+                                    ItemsSource="{Binding Themes, 
+                                    Mode=Default, 
+                                    UpdateSourceTrigger=PropertyChanged}" 
+                                    SelectionUnit="FullRow"
+                                    IsReadOnly="True"
+                                    HeadersVisibility="None"
+                                    GridLinesVisibility="None"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+            >
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <!-- When the outer row is selected, change background color -->
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="LightBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
+
+                                <DataGrid.Columns>
+                                    <!--The only column is for theme´s name-->
+                                    <DataGridTemplateColumn Header="ThemeName"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                    <Label x:Name="tbxThemeName" 
+                                                           Background="Transparent"
+                                                           Content="{Binding}"
+                                                    />
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>

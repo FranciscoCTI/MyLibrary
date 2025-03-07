@@ -7,7 +7,7 @@
         xmlns:vm ="clr-namespace:Library.UI.ViewModels"
         mc:Ignorable="d"
         Title="BookWindow" 
-        Height="450" 
+        Height="600" 
         Width="800">
 
     <Window.DataContext>
@@ -49,7 +49,8 @@
                              VerticalContentAlignment="Center"
                              Margin="2,2,2,2"
                              DockPanel.Dock="Left"
-                             Text="{Binding Book.ISBN, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Book.ISBN, 
+                                        UpdateSourceTrigger=PropertyChanged}"
                              >
                     </TextBox>
                 </DockPanel>
@@ -60,7 +61,8 @@
                 <DockPanel LastChildFill="True">
                     <Label>Title:</Label>
                     <TextBox Name="TbxTitle"
-                             Text="{Binding Book.Name, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Book.Name, 
+                                        UpdateSourceTrigger=PropertyChanged}"
                              TextAlignment="Center"
                              HorizontalAlignment="Stretch"
                              VerticalContentAlignment="Center"
@@ -71,7 +73,7 @@
             </Grid>
 
             <!--Grid with DockPanel with Author content-->
-            <Grid>
+            <Grid Margin="0,0,0,15">
                 <DockPanel LastChildFill="True">
                     <StackPanel Orientation="Vertical">
                         <Label>Authors:</Label>
@@ -124,6 +126,51 @@
                                             Margin="2">
                                         </TextBox>
                           
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DockPanel>
+            </Grid>
+
+            <!--Grid with DockPanel with themes content-->
+            <Grid Margin="0,0,0,15">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Vertical">
+                        <Label>Themes:</Label>
+                    </StackPanel>
+
+                    <!--ItemsControl with all the themes-->
+                    <ItemsControl ItemsSource="{Binding AllAvailableThemes}"
+                      d:ItemsSource="{d:SampleData}"
+                      Name="ItemsCtrlThemes"
+                      Margin="0,25,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border BorderThickness="1" 
+                                            BorderBrush="LightGray"
+                                            Margin="5">
+                                        <StackPanel Orientation="Horizontal"
+                                                    Margin="2">
+                                            <Label Content="{Binding Mode=OneWay}"
+                                                   DockPanel.Dock="Left"
+                                                   HorizontalAlignment="Stretch"
+                                                   Grid.Column="0"
+                                                   Margin="2">
+                                            </Label>
+                                            <CheckBox x:Name="chbxThemeItem" 
+                                                      IsChecked="False"
+                                                      VerticalAlignment="Center"
+                                                      Margin="4,0,6,0"></CheckBox>
+                                        </StackPanel>
+                                    </Border>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

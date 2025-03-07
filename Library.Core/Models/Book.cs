@@ -55,6 +55,7 @@ namespace Library.Core.Models
             this.Name = name;
             this.AuthorInformation = new AuthorInformation();
             this.Description = "-";
+            this.Themes = new List<Theme>();
         }
 
         /// <summary>
@@ -65,6 +66,7 @@ namespace Library.Core.Models
             this.Name = "new authors collection";
             this.AuthorInformation = new AuthorInformation();
             this.Description = "-";
+            this.Themes = new List<Theme>();
         }
 
         /// <inheritdoc />

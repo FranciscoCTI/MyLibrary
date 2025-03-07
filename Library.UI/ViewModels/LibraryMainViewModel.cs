@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using Library.UI.Views;
 using System.Windows.Controls;
+using Library.Core.Enums;
 using Library.Core.Factories;
 using Library.Global;
 using Library.Services;
@@ -58,7 +59,6 @@ namespace Library.UI.ViewModels
         /// </summary>
         private ExceptionManager ExceptionManager { get;}
 
-
         /// <summary>
         /// Manage all the MongoDB processes
         /// </summary>
@@ -95,6 +95,10 @@ namespace Library.UI.ViewModels
 
             foreach (var itemBook in list)
             {
+                if (itemBook.Themes == null)
+                {
+                    itemBook.Themes = new List<Theme>();
+                }
                 Library.BookCollection.Add(itemBook);
             }
         }
@@ -172,10 +176,12 @@ namespace Library.UI.ViewModels
         }
 
         /// <summary>
-        /// Update a <see cref="IBook"/> from the DB, by its ISBN and the new <see cref="IBook"/> element.
+        /// Update a <see cref="IBook"/> from the DB, by its ISBN and the new
+        /// <see cref="IBook"/> element.
         /// </summary>
         /// <param name="isbn">The ISBN of the <see cref="IBook"/> to remove</param>
-        /// <param name="bookToUpdate">The  <see cref="IBook"/> with the updated values</param>
+        /// <param name="bookToUpdate">The  <see cref="IBook"/> with the updated values
+        /// </param>
         private async Task UpdateBookAsync(long isbn, IBook bookToUpdate)
         {
             await _mongoService.UpdateBookAsync(isbn, bookToUpdate);

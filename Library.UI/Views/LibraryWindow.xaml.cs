@@ -27,7 +27,8 @@ namespace Library.UI.Views
         }
 
         /// <summary>
-        /// Creates a new <see cref="Views.BookWindow"/> and define it in the <see cref="BookWindow"/> field
+        /// Creates a new <see cref="Views.BookWindow"/> and define it in the
+        /// <see cref="BookWindow"/> field
         /// </summary>
         public void SetBookWindow()
         {

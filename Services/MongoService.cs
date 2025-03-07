@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Library.Core.Enums;
 using Library.Core.Interfaces;
 using Library.Core.Models;
 using Library.Global;
@@ -63,6 +64,12 @@ namespace Library.Services
             });
 
             BsonClassMap.RegisterClassMap<Author>(cm =>
+            {
+                cm.AutoMap();
+                cm.SetIgnoreExtraElements(true);
+            });
+
+            BsonClassMap.RegisterClassMap<Theme>(cm =>
             {
                 cm.AutoMap();
                 cm.SetIgnoreExtraElements(true);

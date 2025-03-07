@@ -4,6 +4,7 @@ using Library.UI.ViewModels;
 using System.Windows.Controls;
 using Author = Library.Core.Models.Author;
 using Book = Library.Core.Models.Book;
+using System.Windows.Data;
 
 namespace Library.UI.Views
 {
@@ -24,6 +25,18 @@ namespace Library.UI.Views
             InitializeComponent();
             _viewModel = DataContext as LibraryMainViewModel;
             _viewModel.MainWindow = this;
+
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+           UpdateDgrBooks();
+        }
+
+        public void UpdateDgrBooks()
+        {
+            CollectionViewSource.GetDefaultView(dgrBooks.ItemsSource).Refresh();
         }
 
         /// <summary>
@@ -51,6 +64,27 @@ namespace Library.UI.Views
         internal BookWindow GetBookWindow()
         {
             return BookWindow;
+        }
+
+        /// <summary>
+        /// Filter for the <see cref="CollectionViewSource"/> that shows the library items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cvs_Filter_Name(object sender, FilterEventArgs e)
+        {
+            IBook book = e.Item as IBook;
+
+            string bookNameLower = book.Name.ToLower();
+
+            if (bookNameLower.Contains(_viewModel.BookFilter.ToLower()) || _viewModel.BookFilter == "")
+            {
+                e.Accepted = true;
+            }
+            else
+            {
+                e.Accepted = false;
+            }
         }
     }
 }

@@ -16,13 +16,20 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <converters:ThemeConverter x:Key="ThemeConverter"/>
+        <ResourceDictionary>
+            <CollectionViewSource x:Key="CvsLibrosFiltrados" 
+                                      Source="{Binding Library.BookCollection}"
+                                      Filter="Cvs_Filter_Name">
+            </CollectionViewSource>
+        </ResourceDictionary>
     </Window.Resources>
 
     <!--Overall grid for the form-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="30"/>
@@ -37,22 +44,60 @@
         <!--Label with Library title-->
         <Label 
             Grid.Column="1" 
+            Grid.Row="1"
             HorizontalAlignment="Left"
             Content ="{Binding LibraryName, 
                         UpdateSourceTrigger=PropertyChanged}"
             ></Label>
 
+        <StackPanel Grid.Column="1"
+                            Grid.Row="2" Orientation="Horizontal">
+            <Label Margin="0,0,15,0">Filters:</Label>
+            <Grid>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="0,0,-819,0">
+                    <TextBox Name="TbxFilterName" 
+                                     HorizontalAlignment="Stretch"
+                                     Margin="2"
+                                     DockPanel.Dock="Left"
+                                     Width="160"
+                                     Text="{Binding BookFilter, 
+                                            Mode=OneWayToSource,
+                                            UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+                    <TextBox Name="TbxFilterISBN"
+                                     HorizontalAlignment="Stretch"
+                                     Margin="2"
+                                     DockPanel.Dock="Left"
+                                     Width="160"></TextBox>
+                    <TextBox Name="TbxFilterAuthors"
+                                     HorizontalAlignment="Stretch"
+                                     Margin="2"
+                                     Width="160"></TextBox>
+                    <TextBox Name="TbxFilterThemes"
+                                     HorizontalAlignment="Stretch"
+                                     Margin="2"
+                                     Width="160"></TextBox>
+                    <TextBox Name="TbxFilterComments"
+                                     HorizontalAlignment="Stretch"
+                                     Margin="2"
+                                     Width="160"></TextBox>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
         <!--Datagrid that shows all the books from the Library-->
         <DataGrid
             Grid.Column="1"
-            Grid.Row="1"
+            Grid.Row="3"
             Name="dgrBooks"
             IsReadOnly="True"
             d:ItemsSource="{d:SampleData}" 
             SelectionMode="Single" SelectionUnit="FullRow"
-            ItemsSource="{Binding Path=Library.BookCollection, 
-                            UpdateSourceTrigger=PropertyChanged}"
-            AutoGenerateColumns="False">
+            ItemsSource="{Binding 
+                        Source={StaticResource CvsLibrosFiltrados}, 
+                        Mode=OneWay}" 
+            AutoGenerateColumns="False"
+            Margin="60,0,0,0">
 
             <!--The grid columns-->
             <DataGrid.Columns>
@@ -184,7 +229,7 @@
                                                             Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                    <Label x:Name="tbxThemeName" 
+                                                <Label x:Name="tbxThemeName" 
                                                            Background="Transparent"
                                                            Content="{Binding}"
                                                     />
@@ -219,8 +264,7 @@
         <!--Buttons-->
         <StackPanel Orientation="Horizontal" 
                     Grid.Column="1" 
-                    Grid.Row="3" 
-                    HorizontalAlignment="Stretch">
+                    Grid.Row="4" Margin="0,10,0,0" Grid.RowSpan="2">
 
             <!--Add Book button-->
             <Button Name="BtnAddBook" 

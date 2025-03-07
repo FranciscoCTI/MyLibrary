@@ -7,8 +7,10 @@ using Library.Core.Models;
 using Library.UI.Commands;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Library.UI.Views;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Library.Core.Enums;
 using Library.Core.Factories;
 using Library.Global;
@@ -64,6 +66,21 @@ namespace Library.UI.ViewModels
         /// </summary>
         private readonly MongoService _mongoService;
 
+        private string _bookFilter = string.Empty;
+
+        public string BookFilter
+        {
+            get
+            {
+                return _bookFilter;
+            }
+            set
+            {
+                _bookFilter = value;
+                OnPropertyChanged(nameof(BookFilter));
+                UpdateDgrBooks();
+            }
+        }
 
         /// <summary>
         /// Creates a new instance of <see cref="LibraryMainViewModel"/>
@@ -78,6 +95,18 @@ namespace Library.UI.ViewModels
             _mongoService = new MongoService();
 
             _ = LoadElementsAsync();
+
+        }
+
+        /// <summary>
+        /// Update the collection of <see cref="IBook"/> in the <see cref="MainWindow"/>, according with its filters
+        /// </summary>
+        private void UpdateDgrBooks()
+        {
+            if (MainWindow != null)
+            {
+                MainWindow.UpdateDgrBooks();
+            }
         }
 
         /// <summary>
@@ -236,5 +265,11 @@ namespace Library.UI.ViewModels
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string?
+            propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

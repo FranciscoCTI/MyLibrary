@@ -50,13 +50,31 @@
         </Grid.ColumnDefinitions>
 
         <!--Label with Library title-->
-        <Label 
-            Grid.Column="1" 
+        <DockPanel
+            Grid.Column="1"
             Grid.Row="1"
-            HorizontalAlignment="Left"
-            Content ="{Binding LibraryName, 
-                        UpdateSourceTrigger=PropertyChanged}"
+            LastChildFill="True">
+
+            <Label 
+                HorizontalAlignment="Left"
+                DockPanel.Dock="Left"
+                Content ="{Binding LibraryName, 
+                UpdateSourceTrigger=PropertyChanged}"
             ></Label>
+
+            <!--Combobox to choose collection-->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Label DockPanel.Dock="Left"
+                       HorizontalContentAlignment="Right"
+                       Content="Choose collection"/>
+                <ComboBox x:Name="cmbSource"
+                          Width="200"
+                          Margin="3"
+                          ItemsSource="{Binding PossibleCollections, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedCollection, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </DockPanel>
 
         <!--Filter content-->
             <DockPanel Grid.Row="2" 

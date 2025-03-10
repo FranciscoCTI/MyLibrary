@@ -7,6 +7,7 @@ using Library.Core.Enums;
 using Library.Core.Interfaces;
 using Library.Core.Models;
 using Library.Global;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
@@ -127,6 +128,24 @@ namespace Library.Services
             var filter = Builders<Book>.Filter.Eq(b => b.ISBN, isbn);
             await _books.ReplaceOneAsync(filter, (Book)book, 
                                         new ReplaceOptions { IsUpsert = true });
+        }
+
+        public async Task<List<string>> GetPossibleCollections()
+        {
+            List<string> result = new List<string>();
+
+            var client = new MongoClient(MongoConstants.MongoConnectionString);
+            var db = client.GetDatabase(MongoConstants.MongoDatabaseName);
+
+            var col = db.ListCollectionNames();
+            var collectionNames = await col.ToListAsync();
+
+            foreach (var collectionName in collectionNames)
+            {
+                result.Add(collectionName);
+            }
+
+            return result;
         }
     }
 }

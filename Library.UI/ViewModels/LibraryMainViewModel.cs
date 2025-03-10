@@ -7,6 +7,7 @@ using Library.Core.Models;
 using Library.UI.Commands;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Runtime.CompilerServices;
 using Library.UI.Views;
 using System.Windows.Controls;
@@ -71,6 +72,23 @@ namespace Library.UI.ViewModels
         private string _bookAuthorsFilterString = string.Empty;
         private string _bookThemesFilterString = string.Empty;
         private string _bookDescriptionFilterString = string.Empty;
+
+        private string _selectedCollection = "";
+
+        public string SelectedCollection
+        {
+            get
+            {
+                return _selectedCollection;
+            }
+            set
+            {
+                _selectedCollection = value;
+                MongoConstants.MongoBooksCollectionName = _selectedCollection;
+                _ = LoadElementsAsync();
+            }
+        }
+        public List<string> PossibleCollections { get; set; } = new List<string>();
 
         /// <summary>
         /// Store the string for filtering by <see cref="IBook"/> name
@@ -169,6 +187,11 @@ namespace Library.UI.ViewModels
 
             _mongoService = new MongoService();
 
+            var a = _mongoService.GetPossibleCollections();
+            PossibleCollections = a.Result;
+
+            SelectedCollection = PossibleCollections.First();
+
             _ = LoadElementsAsync();
 
         }
@@ -225,10 +248,11 @@ namespace Library.UI.ViewModels
                     
                 BookWindowViewModel vm = bookWindow.DataContext as BookWindowViewModel;
 
-                await AddBookAsync(vm.Book);
-
-                _ = LoadElementsAsync();
-
+                if (bookWindow.DialogResult == true)
+                {
+                    await AddBookAsync(vm.Book);
+                    _ = LoadElementsAsync();
+                }
             }
             catch (Exception e)
             {

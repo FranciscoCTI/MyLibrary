@@ -68,8 +68,13 @@ namespace Library.UI.ViewModels
 
         private string _bookNameFilterString = string.Empty;
         private string _bookIsbnFilterString = string.Empty;
+        private string _bookAuthorsFilterString = string.Empty;
+        private string _bookThemesFilterString = string.Empty;
         private string _bookDescriptionFilterString = string.Empty;
 
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> name
+        /// </summary>
         public string BookNameFilterString
         {
             get
@@ -84,6 +89,9 @@ namespace Library.UI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> ISBN
+        /// </summary>
         public string BookIsbnFilterString
         {
             get
@@ -97,6 +105,44 @@ namespace Library.UI.ViewModels
                 UpdateDgrBooks();
             }
         }
+
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> authors
+        /// </summary>
+        public string BookAuthorsFilterString
+        {
+            get
+            {
+                return _bookAuthorsFilterString;
+            }
+            set
+            {
+                _bookAuthorsFilterString = value;
+                OnPropertyChanged(nameof(BookAuthorsFilterString));
+                UpdateDgrBooks();
+            }
+        }
+
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> themes
+        /// </summary>
+        public string BookThemesFilterString
+        {
+            get
+            {
+                return _bookThemesFilterString;
+            }
+            set
+            {
+                _bookThemesFilterString = value;
+                OnPropertyChanged(nameof(BookThemesFilterString));
+                UpdateDgrBooks();
+            }
+        }
+
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> description
+        /// </summary>
         public string BookDescriptionFilterString
         {
             get

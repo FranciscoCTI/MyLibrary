@@ -18,7 +18,7 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <CollectionViewSource x:Key="CvsLibrosFiltrados" 
+            <CollectionViewSource x:Key="CvsFilteredBooks" 
                                       Source="{Binding Library.BookCollection}"
                                       Filter="Cvs_Filter_Name">
                 <CollectionViewSource.GroupDescriptions>
@@ -94,16 +94,23 @@
                         <TextBox Grid.Column="2"
                                  Name="TbxFilterAuthors"
                                  HorizontalAlignment="Stretch"
-                                 Margin="2">
+                                 Margin="2"
+                                 Text="{Binding BookAuthorsFilterString, 
+                                 Mode=OneWayToSource,
+                                 UpdateSourceTrigger=PropertyChanged}">
                         </TextBox>
 
                         <TextBox Grid.Column="3"
                                  Name="TbxFilterThemes"
                                  HorizontalAlignment="Stretch"
-                                 Margin="2"></TextBox>
+                                 Margin="2"
+                                 Text="{Binding BookThemesFilterString, 
+                                 Mode=OneWayToSource,
+                                 UpdateSourceTrigger=PropertyChanged}"
+                                 ></TextBox>
 
                         <TextBox Grid.Column="4"
-                                 Name="TbxFilterComments"
+                                 Name="TbxFilterDescription"
                                  HorizontalAlignment="Stretch"
                                  Margin="2"
                                  Text="{Binding BookDescriptionFilterString,
@@ -122,7 +129,7 @@
             d:ItemsSource="{d:SampleData}" 
             SelectionMode="Single" SelectionUnit="FullRow"
             ItemsSource="{Binding 
-                        Source={StaticResource CvsLibrosFiltrados}, 
+                        Source={StaticResource CvsFilteredBooks}, 
                         Mode=OneWay}" 
             AutoGenerateColumns="False"
             Margin="60,0,0,0">
@@ -290,33 +297,48 @@
         </DataGrid>
 
         <!--Buttons-->
-        <StackPanel Orientation="Horizontal" 
-                    Grid.Column="1" 
-                    Grid.Row="4" Margin="0,10,0,0" Grid.RowSpan="2">
+        <DockPanel Grid.Column="1" 
+                   Grid.Row="5">
 
-            <!--Add Book button-->
-            <Button Name="BtnAddBook" 
-                    Content="Add" 
-                    HorizontalAlignment="Stretch"
-                    Margin="5" 
-                    Command="{Binding AddBookCommand}"
-                    Width="100"></Button>
+            <!--StackPanel with the buttons-->
+            <StackPanel Orientation="Horizontal" 
+                        Margin="0,0,0,0" Grid.RowSpan="2" 
+                        DockPanel.Dock="Left">
 
-            <!--Remove Book button-->
-            <Button Name="BtnRemoveBook" 
-                    Content="Remove" 
-                    HorizontalAlignment="Stretch"
-                    Margin="5" 
-                    Command="{Binding RemoveBookCommand}"
-                    Width="100"></Button>
+                <!--Add Book button-->
+                <Button Name="BtnAddBook" 
+                        Content="Add" 
+                        HorizontalAlignment="Stretch"
+                        Margin="5" 
+                        Command="{Binding AddBookCommand}"
+                        Width="100"></Button>
 
-            <!--Edit Book button-->
-            <Button Name="BtnEditBook" 
-                    Content="Edit" 
-                    HorizontalAlignment="Stretch"
-                    Margin="5" 
-                    Command="{Binding EditBookCommand}"
-                    Width="100"></Button>
-        </StackPanel>
+                <!--Remove Book button-->
+                <Button Name="BtnRemoveBook" 
+                        Content="Remove" 
+                        HorizontalAlignment="Stretch"
+                        Margin="5" 
+                        Command="{Binding RemoveBookCommand}"
+                        Width="100"></Button>
+
+                <!--Edit Book button-->
+                <Button Name="BtnEditBook" 
+                        Content="Edit" 
+                        HorizontalAlignment="Stretch"
+                        Margin="5" 
+                        Command="{Binding EditBookCommand}"
+                        Width="100"></Button>
+            </StackPanel>
+
+            <!--The number of resulting elements considering the filter-->
+            <StackPanel DockPanel.Dock="Right" 
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal" >
+                <Label HorizontalAlignment="Right">Selected Elements:</Label>
+                <Label Content="{Binding  ElementName=dgrBooks, 
+                    Path=Items.Count}" 
+                       FontWeight="Bold"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

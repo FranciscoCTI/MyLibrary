@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Library.Core.Interfaces;
 using Library.Core.Models;
 using Library.UI.Commands;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Dynamic;
+using System.Runtime.CompilerServices;
 using Library.UI.Views;
 using System.Windows.Controls;
+using System.Windows.Data;
+using Library.Core.Enums;
 using Library.Core.Factories;
+using Library.Global;
 using Library.Services;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -43,7 +49,7 @@ namespace Library.UI.ViewModels
         /// </summary>
         public ILibrary Library { get; set; }
 
-        public string LibraryName => $"These are the books on {Library.Name}";
+        public string LibraryName => $"The books on {Library.Name}:";
 
         /// <summary>
         /// The current <see cref="MainWindow"/> UI
@@ -56,12 +62,118 @@ namespace Library.UI.ViewModels
         /// </summary>
         private ExceptionManager ExceptionManager { get;}
 
-
         /// <summary>
         /// Manage all the MongoDB processes
         /// </summary>
         private readonly MongoService _mongoService;
 
+        private string _bookNameFilterString = string.Empty;
+        private string _bookIsbnFilterString = string.Empty;
+        private string _bookAuthorsFilterString = string.Empty;
+        private string _bookThemesFilterString = string.Empty;
+        private string _bookDescriptionFilterString = string.Empty;
+
+        private string _selectedCollection = "";
+
+        public string SelectedCollection
+        {
+            get
+            {
+                return _selectedCollection;
+            }
+            set
+            {
+                _selectedCollection = value;
+                MongoConstants.MongoBooksCollectionName = _selectedCollection;
+                _ = LoadElementsAsync();
+            }
+        }
+        public List<string> PossibleCollections { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> name
+        /// </summary>
+        public string BookNameFilterString
+        {
+            get
+            {
+                return _bookNameFilterString;
+            }
+            set
+            {
+                _bookNameFilterString = value;
+                OnPropertyChanged(nameof(BookNameFilterString));
+                UpdateDgrBooks();
+            }
+        }
+
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> ISBN
+        /// </summary>
+        public string BookIsbnFilterString
+        {
+            get
+            {
+                return _bookIsbnFilterString;
+            }
+            set
+            {
+                _bookIsbnFilterString = value;
+                OnPropertyChanged(nameof(BookIsbnFilterString));
+                UpdateDgrBooks();
+            }
+        }
+
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> authors
+        /// </summary>
+        public string BookAuthorsFilterString
+        {
+            get
+            {
+                return _bookAuthorsFilterString;
+            }
+            set
+            {
+                _bookAuthorsFilterString = value;
+                OnPropertyChanged(nameof(BookAuthorsFilterString));
+                UpdateDgrBooks();
+            }
+        }
+
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> themes
+        /// </summary>
+        public string BookThemesFilterString
+        {
+            get
+            {
+                return _bookThemesFilterString;
+            }
+            set
+            {
+                _bookThemesFilterString = value;
+                OnPropertyChanged(nameof(BookThemesFilterString));
+                UpdateDgrBooks();
+            }
+        }
+
+        /// <summary>
+        /// Store the string for filtering by <see cref="IBook"/> description
+        /// </summary>
+        public string BookDescriptionFilterString
+        {
+            get
+            {
+                return _bookDescriptionFilterString;
+            }
+            set
+            {
+                _bookDescriptionFilterString = value;
+                OnPropertyChanged(nameof(BookDescriptionFilterString));
+                UpdateDgrBooks();
+            }
+        }
 
         /// <summary>
         /// Creates a new instance of <see cref="LibraryMainViewModel"/>
@@ -75,7 +187,24 @@ namespace Library.UI.ViewModels
 
             _mongoService = new MongoService();
 
+            var a = _mongoService.GetPossibleCollections();
+            PossibleCollections = a.Result;
+
+            SelectedCollection = PossibleCollections.First();
+
             _ = LoadElementsAsync();
+
+        }
+
+        /// <summary>
+        /// Update the collection of <see cref="IBook"/> in the <see cref="MainWindow"/>, according with its filters
+        /// </summary>
+        private void UpdateDgrBooks()
+        {
+            if (MainWindow != null)
+            {
+                MainWindow.UpdateDgrBooks();
+            }
         }
 
         /// <summary>
@@ -84,15 +213,19 @@ namespace Library.UI.ViewModels
         /// <returns></returns>
         private async Task LoadElementsAsync()
         {
-            var bookListFromDB = _mongoService.GetBooksAsync();
+            var bookListFromDb = _mongoService.GetBooksAsync(MongoConstants.MongoBooksCollectionName);
 
-            var elementList = await bookListFromDB;
+            var elementList = await bookListFromDb;
             var list = elementList.ToList<IBook>();
 
             Library.BookCollection.Clear();
 
             foreach (var itemBook in list)
             {
+                if (itemBook.Themes == null)
+                {
+                    itemBook.Themes = new List<Theme>();
+                }
                 Library.BookCollection.Add(itemBook);
             }
         }
@@ -115,10 +248,11 @@ namespace Library.UI.ViewModels
                     
                 BookWindowViewModel vm = bookWindow.DataContext as BookWindowViewModel;
 
-                await AddBookAsync(vm.Book);
-
-                _ = LoadElementsAsync();
-
+                if (bookWindow.DialogResult == true)
+                {
+                    await AddBookAsync(vm.Book);
+                    _ = LoadElementsAsync();
+                }
             }
             catch (Exception e)
             {
@@ -170,10 +304,12 @@ namespace Library.UI.ViewModels
         }
 
         /// <summary>
-        /// Update a <see cref="IBook"/> from the DB, by its ISBN and the new <see cref="IBook"/> element.
+        /// Update a <see cref="IBook"/> from the DB, by its ISBN and the new
+        /// <see cref="IBook"/> element.
         /// </summary>
         /// <param name="isbn">The ISBN of the <see cref="IBook"/> to remove</param>
-        /// <param name="bookToUpdate">The  <see cref="IBook"/> with the updated values</param>
+        /// <param name="bookToUpdate">The  <see cref="IBook"/> with the updated values
+        /// </param>
         private async Task UpdateBookAsync(long isbn, IBook bookToUpdate)
         {
             await _mongoService.UpdateBookAsync(isbn, bookToUpdate);
@@ -197,10 +333,10 @@ namespace Library.UI.ViewModels
 
                 var toBeEdited = (IBook)MainWindow.GetSelectedItem();
 
-                long isbn = toBeEdited.ISBN;
-
                 if (toBeEdited != null)
                 {
+                    long isbn = toBeEdited.ISBN;
+
                     bookWindow.SetBook(toBeEdited);
                     bookWindow.ShowDialog();
 
@@ -228,5 +364,11 @@ namespace Library.UI.ViewModels
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string?
+            propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

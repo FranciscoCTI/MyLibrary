@@ -26,6 +26,19 @@ namespace Library.UI.Views
 
             _viewModel = this.DataContext as BookWindowViewModel;
             _viewModel.BookWindow = this;
+
+            this.Loaded += OnLoaded;
+        }
+
+        /// <summary>
+        /// When the UI is loaded, update the values of the selected <see cref="IBook"/>
+        /// on the controls
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.UpdateBookValues();
         }
 
         /// <summary>

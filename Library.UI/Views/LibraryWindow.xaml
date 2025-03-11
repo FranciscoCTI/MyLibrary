@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library.UI"
+        xmlns:converters="clr-namespace:Library.UI.Converters"
         xmlns:vm ="clr-namespace:Library.UI.ViewModels"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
-        Title="Library" 
+        Title="Library"
         Height="600" 
         Width="900">
 
@@ -14,10 +16,32 @@
         <vm:LibraryMainViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <CollectionViewSource x:Key="CvsFilteredBooks" 
+                                      Source="{Binding Library.BookCollection}"
+                                      Filter="Cvs_Filter_Name">
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="Name"/>
+                </CollectionViewSource.GroupDescriptions>
+                <CollectionViewSource.SortDescriptions>
+                    <componentModel:SortDescription PropertyName="ISBN" 
+                                                    Direction="Descending"/>
+                </CollectionViewSource.SortDescriptions>
+            </CollectionViewSource>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Library.UI.Resources;Component/Styles/ControlStyles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+
     <!--Overall grid for the form-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="30"/>
@@ -30,24 +54,122 @@
         </Grid.ColumnDefinitions>
 
         <!--Label with Library title-->
-        <Label 
-            Grid.Column="1" 
-            HorizontalAlignment="Left"
-            Content ="{Binding LibraryName, 
-                        UpdateSourceTrigger=PropertyChanged}"
-            ></Label>
+        <DockPanel
+            Grid.Column="1"
+            Grid.Row="1"
+            LastChildFill="True" 
+            Margin="0,20,0,20">
+
+            <Label 
+                HorizontalAlignment="Left"
+                DockPanel.Dock="Left"
+                Content ="{Binding LibraryName, 
+                UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource Fc.Label.Cascadia.25.Bold}"
+            />
+
+            <!--Combobox to choose collection-->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Label DockPanel.Dock="Left"
+                       HorizontalContentAlignment="Right"
+                       Content="Choose collection"
+                       Style="{StaticResource Fc.Label.Cascadia.15}"/>
+                <ComboBox x:Name="cmbSource"
+                          Width="200"
+                          Margin="3"
+                          ItemsSource="{Binding PossibleCollections, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedCollection, UpdateSourceTrigger=PropertyChanged}"
+                          Style="{StaticResource Fc.Style.ComboBox}"/>
+
+            </StackPanel>
+        </DockPanel>
+
+        <!--Filter content-->
+            <DockPanel Grid.Row="2" 
+                       Grid.Column="1" 
+                       LastChildFill="True"
+                       Margin="0,0,0,10">
+                <Label Margin="0,0,20,0"
+                       Style="{StaticResource Fc.Label.Cascadia.15}">Filters:</Label>
+                <Grid DockPanel.Dock="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+
+                        <TextBox Name="TbxFilterName" 
+                                 Grid.Column="0"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"
+                                 Text="{Binding BookNameFilterString, 
+                                 Mode=OneWayToSource,
+                                 UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource Fc.Style.TextBox}">
+                        </TextBox>
+
+                        <TextBox Grid.Column="1" 
+                                 Name="TbxFilterISBN"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"
+                                 Text="{Binding BookIsbnFilterString, 
+                                 Mode=OneWayToSource,
+                                 UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource Fc.Style.TextBox}">
+                        </TextBox>
+
+                        <TextBox Grid.Column="2"
+                                 Name="TbxFilterAuthors"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"
+                                 Text="{Binding BookAuthorsFilterString, 
+                                 Mode=OneWayToSource,
+                                 UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource Fc.Style.TextBox}">
+                        </TextBox>
+
+                        <TextBox Grid.Column="3"
+                                 Name="TbxFilterThemes"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"
+                                 Text="{Binding BookThemesFilterString, 
+                                 Mode=OneWayToSource,
+                                 UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource Fc.Style.TextBox}"
+                                 >
+                        </TextBox>
+
+                        <TextBox Grid.Column="4"
+                                 Name="TbxFilterDescription"
+                                 HorizontalAlignment="Stretch"
+                                 Margin="2"
+                                 Text="{Binding BookDescriptionFilterString,
+                                 Mode =OneWayToSource, 
+                                 UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource Fc.Style.TextBox}">
+                        </TextBox>
+                    </Grid>
+            </DockPanel>
 
         <!--Datagrid that shows all the books from the Library-->
         <DataGrid
             Grid.Column="1"
-            Grid.Row="1"
+            Grid.Row="3"
             Name="dgrBooks"
             IsReadOnly="True"
             d:ItemsSource="{d:SampleData}" 
-            SelectionMode="Single" SelectionUnit="FullRow"
-            ItemsSource="{Binding Path=Library.BookCollection, 
-                            UpdateSourceTrigger=PropertyChanged}"
-            AutoGenerateColumns="False">
+            SelectionMode="Single" 
+            SelectionUnit="FullRow"
+            ItemsSource="{Binding 
+                        Source={StaticResource CvsFilteredBooks}, 
+                        Mode=OneWay}" 
+            AutoGenerateColumns="False"
+            Margin="60,0,0,0" 
+            ColumnHeaderStyle="{StaticResource Fc.Style.Datagrid.Header}">
 
             <!--The grid columns-->
             <DataGrid.Columns>
@@ -60,6 +182,7 @@
                             <Label x:Name="tbxBookName" 
                                    Background="Transparent"
                                    Content="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                   Style="{DynamicResource Fc.Label.Cascadia.15}"
                             />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -73,6 +196,7 @@
                             <Label x:Name="tbxBookISBN" 
                                    Background="Transparent"
                                    Content="{Binding ISBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                   Style="{DynamicResource Fc.Label.Cascadia.15}"
                             />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -120,14 +244,16 @@
                                                     <Label x:Name="tbxAuthorFirstName" 
                                                            Background="Transparent"
                                                            Content="{Binding FirstName, 
-                                                        Mode=TwoWay,
-                                                        UpdateSourceTrigger=PropertyChanged}" 
+                                                            Mode=TwoWay,
+                                                            UpdateSourceTrigger=PropertyChanged}"
+                                                           Style="{DynamicResource Fc.Label.Cascadia.15}"
                                                     />
                                                     <Label x:Name="tbxAuthorLastName" 
                                                            Background="Transparent"
                                                            Content="{Binding LastName, 
                                                            Mode=TwoWay,
                                                            UpdateSourceTrigger=PropertyChanged}" 
+                                                           Style="{DynamicResource Fc.Label.Cascadia.15}"
                                                     />
                                                 </StackPanel>
                                             </DataTemplate>
@@ -140,17 +266,73 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <!--Column for Book´s Comments-->
-                <DataGridTemplateColumn Header="Comments" 
+                <!--Column for Book´s themes-->
+                <DataGridTemplateColumn Header="Themes" 
+                        Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+
+                            <!--Datagrid with all the themes of this Book-->
+                            <DataGrid Name="dgrThemes"
+                                    d:ItemsSource="{d:SampleData}"
+                                    AutoGenerateColumns="false"
+                                    ItemsSource="{Binding Themes, 
+                                    Mode=Default, 
+                                    UpdateSourceTrigger=PropertyChanged}" 
+                                    SelectionUnit="FullRow"
+                                    IsReadOnly="True"
+                                    HeadersVisibility="None"
+                                    GridLinesVisibility="None"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+            >
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <!-- When the outer row is selected, change background color -->
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="LightBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
+
+                                <DataGrid.Columns>
+                                    <!--The only column is for theme´s name-->
+                                    <DataGridTemplateColumn Header="ThemeName"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label x:Name="tbxThemeName" 
+                                                           Background="Transparent"
+                                                           Content="{Binding}"
+                                                           Style="{DynamicResource Fc.Label.Cascadia.15}"
+                                                    />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--Column for Book´s descríption-->
+                <DataGridTemplateColumn Header="Description" 
                                         Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label x:Name="tbxBookISBN" 
-                                   Background="Transparent"
-                                   Content="{Binding Description, 
-                                                            Mode=TwoWay, 
-                                                            UpdateSourceTrigger=PropertyChanged}" 
-                            />
+                            <Label x:Name="tbxBookDescription"
+                                   Style="{DynamicResource Fc.Label.Cascadia.15}">
+                                   <TextBox TextWrapping="Wrap" 
+                                            Text ="{ Binding Description, 
+                                            Mode=TwoWay, 
+                                            UpdateSourceTrigger=PropertyChanged}" BorderThickness="0">
+                                   </TextBox>
+                            </Label>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -159,34 +341,54 @@
         </DataGrid>
 
         <!--Buttons-->
-        <StackPanel Orientation="Horizontal" 
-                    Grid.Column="1" 
-                    Grid.Row="3" 
-                    HorizontalAlignment="Stretch">
+        <DockPanel Grid.Column="1" 
+                   Grid.Row="5">
 
-            <!--Add Book button-->
-            <Button Name="BtnAddBook" 
-                    Content="Add" 
-                    HorizontalAlignment="Stretch"
-                    Margin="5" 
-                    Command="{Binding AddBookCommand}"
-                    Width="100"></Button>
+            <!--StackPanel with the buttons-->
+            <StackPanel Orientation="Horizontal" 
+                        Margin="0,0,0,0" Grid.RowSpan="2" 
+                        DockPanel.Dock="Left">
 
-            <!--Remove Book button-->
-            <Button Name="BtnRemoveBook" 
-                    Content="Remove" 
-                    HorizontalAlignment="Stretch"
-                    Margin="5" 
-                    Command="{Binding RemoveBookCommand}"
-                    Width="100"></Button>
+                <!--Add Book button-->
+                <Button Name="BtnAddBook" 
+                        Content="Add" 
+                        HorizontalAlignment="Stretch"
+                        Margin="5" 
+                        Command="{Binding AddBookCommand}"
+                        Width="100"
+                        Style="{DynamicResource Fc.Style.Button}"></Button>
 
-            <!--Edit Book button-->
-            <Button Name="BtnEditBook" 
-                    Content="Edit" 
-                    HorizontalAlignment="Stretch"
-                    Margin="5" 
-                    Command="{Binding EditBookCommand}"
-                    Width="100"></Button>
-        </StackPanel>
+                <!--Remove Book button-->
+                <Button Name="BtnRemoveBook" 
+                        Content="Remove" 
+                        HorizontalAlignment="Stretch"
+                        Margin="5" 
+                        Command="{Binding RemoveBookCommand}"
+                        Width="100"
+                        Style="{DynamicResource Fc.Style.Button}"></Button>
+
+                <!--Edit Book button-->
+                <Button Name="BtnEditBook" 
+                        Content="Edit" 
+                        HorizontalAlignment="Stretch"
+                        Margin="5" 
+                        Command="{Binding EditBookCommand}"
+                        Width="100"
+                        Style="{DynamicResource Fc.Style.Button}"></Button>
+            </StackPanel>
+
+            <!--The number of resulting elements considering the filter-->
+            <StackPanel DockPanel.Dock="Right" 
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal" >
+                <Label HorizontalAlignment="Right"
+                       Style="{StaticResource Fc.Label.Cascadia.15}"
+                       >Selected Elements:</Label>
+                <Label Content="{Binding  ElementName=dgrBooks, 
+                    Path=Items.Count}" 
+                       FontWeight="Bold"
+                       Style="{StaticResource Fc.Label.Cascadia.15}"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

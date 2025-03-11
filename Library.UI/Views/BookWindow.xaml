@@ -7,12 +7,21 @@
         xmlns:vm ="clr-namespace:Library.UI.ViewModels"
         mc:Ignorable="d"
         Title="BookWindow" 
-        Height="450" 
+        Height="600" 
         Width="800">
 
     <Window.DataContext>
         <vm:BookWindowViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Library.UI.Resources;Component/Styles/ControlStyles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
 
     <!--Overall grid the form-->
     <Grid>
@@ -31,7 +40,7 @@
         <Label 
             Grid.Column="1" 
             HorizontalAlignment="Left" 
-            FontWeight="Bold"
+            Style="{StaticResource Fc.Label.Cascadia.15.Bold}"
         >Book information</Label>
 
         <!--StackPanel with all the book information-->
@@ -42,14 +51,16 @@
             <!--Grid with DockPanel with ISBN content-->
             <Grid>
                 <DockPanel LastChildFill="True">
-                    <Label>ISBN:</Label>
+                    <Label Style="{StaticResource Fc.Label.Cascadia.15}">ISBN:</Label>
                     <TextBox Name="TbxIsbn"
                              TextAlignment="Center"
                              HorizontalAlignment="Stretch"
                              VerticalContentAlignment="Center"
                              Margin="2,2,2,2"
                              DockPanel.Dock="Left"
-                             Text="{Binding Book.ISBN, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Book.ISBN, 
+                                        UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource Fc.Style.TextBox}"
                              >
                     </TextBox>
                 </DockPanel>
@@ -58,23 +69,28 @@
             <!--Grid with DockPanel with book title content-->
             <Grid>
                 <DockPanel LastChildFill="True">
-                    <Label>Title:</Label>
+                    <Label
+                        Style="{StaticResource Fc.Label.Cascadia.15}" 
+                        Content="Title:"/>
                     <TextBox Name="TbxTitle"
-                             Text="{Binding Book.Name, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Book.Name, 
+                                        UpdateSourceTrigger=PropertyChanged}"
                              TextAlignment="Center"
                              HorizontalAlignment="Stretch"
                              VerticalContentAlignment="Center"
                              Margin="2,2,2,2"
-                             DockPanel.Dock="Left">
+                             DockPanel.Dock="Left"
+                             Style="{StaticResource Fc.Style.TextBox}">
                     </TextBox>
                 </DockPanel>
             </Grid>
 
             <!--Grid with DockPanel with Author content-->
-            <Grid>
+            <Grid Margin="0,0,0,15">
                 <DockPanel LastChildFill="True">
                     <StackPanel Orientation="Vertical">
-                        <Label>Authors:</Label>
+                        <Label Content="Authors:"
+                               Style="{StaticResource Fc.Label.Cascadia.15}"/>
 
                         <!--Button to add a new User-->
                         <Button Name="btnAddAuthor"
@@ -111,7 +127,8 @@
                                             DockPanel.Dock="Left"
                                             HorizontalAlignment="Stretch"
                                             Grid.Column="0"
-                                            Margin="2">
+                                            Margin="2"
+                                            Style="{StaticResource Fc.Style.TextBox}">
                                         </TextBox>
 
                                         <TextBox Text="{Binding 
@@ -121,9 +138,54 @@
                                             DockPanel.Dock="Right" 
                                             HorizontalAlignment="Stretch"
                                             Grid.Column="1"
-                                            Margin="2">
+                                            Margin="2"
+                                            Style="{StaticResource Fc.Style.TextBox}">
                                         </TextBox>
                           
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DockPanel>
+            </Grid>
+
+            <!--Grid with DockPanel with themes content-->
+            <Grid Margin="0,0,0,15">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Vertical">
+                        <Label Style="{StaticResource Fc.Label.Cascadia.15}" 
+                               Content="Themes:"/>
+                    </StackPanel>
+
+                    <!--ItemsControl with all the themes-->
+                    <ItemsControl ItemsSource="{Binding AllAvailableThemes}"
+                      d:ItemsSource="{d:SampleData}"
+                      Name="ItemsCtrlThemes"
+                      Margin="0,25,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border Style="{StaticResource Fc.Style.Border}">
+                                        <StackPanel Orientation="Horizontal"
+                                                    Margin="2">
+                                            <Label Content="{Binding Mode=OneWay}"
+                                                   DockPanel.Dock="Left"
+                                                   HorizontalAlignment="Stretch"
+                                                   Margin="2"
+                                                   Style="{StaticResource Fc.Label.Cascadia.15}">
+                                            </Label>
+                                            <CheckBox x:Name="chbxThemeItem" 
+                                                      IsChecked="False"
+                                                      VerticalAlignment="Center"
+                                                      Margin="4,0,6,0"/>
+                                        </StackPanel>
+                                    </Border>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -134,14 +196,16 @@
             <!--Grid with DockPanel with description-->
             <Grid>
                 <DockPanel LastChildFill="True">
-                    <Label>Description:</Label>
+                    <Label Content="Description:"
+                           Style="{StaticResource Fc.Label.Cascadia.15}"/>
                     <TextBox Name="TbxDescription"
                              Text="{Binding Book.Description, UpdateSourceTrigger=PropertyChanged}"
                              TextAlignment="Center"
                              HorizontalAlignment="Stretch"
                              VerticalContentAlignment="Center"
                              Margin="2,2,2,2"
-                             DockPanel.Dock="Left">
+                             DockPanel.Dock="Left"
+                             Style="{StaticResource Fc.Style.TextBox}">
                     </TextBox>
                 </DockPanel>
             </Grid>
@@ -155,23 +219,24 @@
                             <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                         <!--Button to accept-->
-                        <Button Name="BtnAccept" 
+                    <Button Name="BtnAccept" 
                                 HorizontalAlignment="Stretch"
                                 DockPanel.Dock="Left" 
                                 Margin="0,0,5,0"
                                 Height="50"
-                                Command="{Binding ProceedCommand}">Accept
-                        </Button>
+                                Command="{Binding ProceedCommand}"
+                                Style="{StaticResource Fc.Style.Button}"
+                                Content="Accept"/>
                         <!--Button to cancel-->
-                        <Button Grid.Column="1" 
+                    <Button Grid.Column="1" 
                                 Name="BtnCancel" 
                                 Margin="5,0,0,0"
                                 DockPanel.Dock="Right"
                                 HorizontalAlignment="Stretch"
                                 Command="{Binding CancelCommand}"
-                                Height="50">Cancel
-                        </Button>
-                    </Grid>
+                                Height="50" Content="Cancel"
+                                Style="{StaticResource Fc.Style.Button}"/>
+                </Grid>
             </DockPanel>
         </StackPanel>
     </Grid>

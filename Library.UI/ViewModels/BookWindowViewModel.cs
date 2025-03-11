@@ -8,7 +8,13 @@ using Library.UI.Views;
 using System.Runtime.CompilerServices;
 using Library.Core.Models;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
+using Library.Core.Enums;
 using Library.Core.Factories;
+using System.Windows.Media;
+using Library.UI.UI.Solvers;
+using Library.Services;
 
 namespace Library.UI.ViewModels
 {
@@ -20,6 +26,7 @@ namespace Library.UI.ViewModels
     {
 
         private IBook _book;
+        private ExceptionManager ExceptionManager { get; }
 
         /// <summary>
         /// The current <see cref="IBook"/>
@@ -79,12 +86,27 @@ namespace Library.UI.ViewModels
         }
 
         /// <summary>
+        /// Return a list of all <see cref="Theme"/>s available to add to a
+        /// <see cref="IBook"/>
+        /// </summary>
+        public ObservableCollection<Theme> AllAvailableThemes
+        {
+            get
+            {
+                return new ObservableCollection<Theme>(Enum.GetValues(typeof(Theme))
+                    .Cast<Theme>().ToList());
+            }
+        }
+
+        /// <summary>
         /// Constructor for the <see cref="BookWindowViewModel"/> class
         /// </summary>
         public BookWindowViewModel()
         {
             LibraryFactory lf = new LibraryFactory();
             Book = lf.CreateBook("Empty");
+
+            ExceptionManager = new ExceptionManager();
         }
 
         /// <summary>
@@ -93,8 +115,72 @@ namespace Library.UI.ViewModels
         /// </summary>
         private void ProceedAddingBook()
         {
+            UpdateThemes();
+
             BookWindow.DialogResult = true;
             BookWindow.Close();
+        }
+
+        /// <summary>
+        /// Gets the selected <see cref="Theme"/>s in the UI and add them to the
+        /// <see cref="IBook"/>> element
+        /// </summary>
+        private void UpdateThemes()
+        {
+            Book.Themes.Clear();
+
+            List<StackPanel> allStackPanels = VisualTreeProcesses
+                        .FindVisualChildren<StackPanel>(BookWindow.ItemsCtrlThemes);
+
+            foreach (var panel in allStackPanels)
+            {
+                CheckBox chbx = VisualTreeProcesses.GetFirstCheckBox(panel);
+                Label label = VisualTreeProcesses.GetFirstLabel(panel);
+
+                if (chbx==null || label == null)
+                {
+                    ExceptionManager.HandleException(
+                        new NullReferenceException("UI element not found"), 
+                        "BookWindowUI");
+                }
+
+                if (chbx!= null && (bool)chbx.IsChecked)
+                {
+                    if (Enum.TryParse(label.Content.ToString(), out Theme result))
+                    {
+                        Book.Themes.Add(result);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Show the current <see cref="IBook"/> themes on the UI
+        /// </summary>
+        private void InputThemes()
+        {
+            var themeList = Book.Themes.Select(x=>x.ToString());
+
+            List<StackPanel> allStackPanels = VisualTreeProcesses
+                .FindVisualChildren<StackPanel>(BookWindow.ItemsCtrlThemes);
+
+            foreach (var panel in allStackPanels)
+            {
+                CheckBox chbx = VisualTreeProcesses.GetFirstCheckBox(panel);
+                Label label = (Label)VisualTreeProcesses.GetFirstLabel(panel);
+
+                if (chbx == null || label == null)
+                {
+                    ExceptionManager.HandleException(
+                        new NullReferenceException("UI element not found"), 
+                        "BookWindowUI");
+                }
+
+                if (themeList.Contains(label.Content.ToString()))
+                {
+                    chbx.IsChecked = true;
+                }
+            }
         }
 
         /// <summary>
@@ -109,7 +195,7 @@ namespace Library.UI.ViewModels
 
         /// <summary>
         /// Adds a new mock <see cref="IAuthor"/> to
-        /// <see cref="Book.AuthorInformation.Authors"/>
+        /// <see cref="AuthorInformation.Authors"/>
         /// and to the <see cref="IAuthor"/>s <see cref="ItemsControl"/>
         /// </summary>
         public void AddAuthor()
@@ -120,7 +206,7 @@ namespace Library.UI.ViewModels
 
         /// <summary>
         /// Removes the last <see cref="IAuthor"/> from
-        /// <see cref="Book.AuthorInformation.Authors"/> and from the
+        /// <see cref="AuthorInformation.Authors"/> and from the
         /// <see cref="IAuthor"/>s <see cref="ItemsControl"/>
         /// </summary>
         public void RemoveAuthor()
@@ -140,6 +226,7 @@ namespace Library.UI.ViewModels
         internal void UpdateBookValues()
         {
             OnPropertyChanged(nameof(Book));
+            InputThemes();
         }
     }
 }

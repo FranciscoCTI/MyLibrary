@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    <!--Color styles-->
+    <Color x:Key="Fc.Black" A="255" R="0" G="0" B="0"/>
+    <SolidColorBrush x:Key="Fc.BlackBrush" Color="{StaticResource Fc.Black}"/>
+
+    <Color x:Key="Fc.Green" A="255" R="200" G="255" B="0"/>
+    <SolidColorBrush x:Key="Fc.GreenBrush" Color="{StaticResource Fc.Green}"/>
+</ResourceDictionary>

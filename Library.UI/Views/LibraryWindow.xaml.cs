@@ -99,7 +99,8 @@ namespace Library.UI.Views
         }
 
         /// <summary>
-        /// Passes only the <see cref="IBook"/>s where the name contains the <see cref="_viewModel.BookNameFilterString"/>
+        /// Passes only the <see cref="IBook"/>s where the name contains the
+        /// <see cref="_viewModel.BookNameFilterString"/>
         /// </summary>
         private bool NameFiltered(string name)
         {
@@ -113,7 +114,8 @@ namespace Library.UI.Views
         }
 
         /// <summary>
-        /// Passes only the <see cref="IBook"/>s where the ISBN contains the <see cref="_viewModel.BookIsbnFilterString"/>
+        /// Passes only the <see cref="IBook"/>s where the ISBN contains the
+        /// <see cref="_viewModel.BookIsbnFilterString"/>
         /// </summary>
         private bool IsbnFiltered(long isbn)
         {
@@ -128,13 +130,15 @@ namespace Library.UI.Views
         }
 
         /// <summary>
-        /// Passes only the <see cref="IBook"/>s where any of the authors contains the <see cref="_viewModel.BookAuthorsFilteringString"/>
+        /// Passes only the <see cref="IBook"/>s where any of the authors contains the
+        /// <see cref="_viewModel.BookAuthorsFilteringString"/>
         /// </summary>
         private bool AuthorsResultFiltered(IAuthorInformation authorInformation)
         {
             var authors = authorInformation.Authors;
 
-            if (authors.Any(x=>x.CompleteName.Contains(_viewModel.BookAuthorsFilterString)) 
+            if (authors.Any(x=>x.CompleteName.Contains(_viewModel.BookAuthorsFilterString, 
+                    StringComparison.InvariantCultureIgnoreCase)) 
                 ||
                 _viewModel.BookAuthorsFilterString == "")
             {
@@ -145,7 +149,8 @@ namespace Library.UI.Views
         }
 
         /// <summary>
-        /// Passes only the <see cref="IBook"/>s where one of the Themes contains the <see cref="_viewModel.BookThemesFilterString"/>
+        /// Passes only the <see cref="IBook"/>s where one of the Themes contains the
+        /// <see cref="_viewModel.BookThemesFilterString"/>
         /// </summary>
         private bool ThemesResultFiltered(List<Theme> themes)
         {
@@ -163,7 +168,8 @@ namespace Library.UI.Views
         }
 
         /// <summary>
-        /// Passes only the <see cref="IBook"/>s where the description contains the <see cref="_viewModel.BookDescriptionFilterString"/>
+        /// Passes only the <see cref="IBook"/>s where the description contains the
+        /// <see cref="_viewModel.BookDescriptionFilterString"/>
         /// </summary>
         private bool DescriptionFiltered(string description)
         {

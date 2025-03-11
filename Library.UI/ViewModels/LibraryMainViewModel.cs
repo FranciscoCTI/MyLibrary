@@ -49,7 +49,7 @@ namespace Library.UI.ViewModels
         /// </summary>
         public ILibrary Library { get; set; }
 
-        public string LibraryName => $"These are the books on {Library.Name}";
+        public string LibraryName => $"The books on {Library.Name}:";
 
         /// <summary>
         /// The current <see cref="MainWindow"/> UI
@@ -333,10 +333,10 @@ namespace Library.UI.ViewModels
 
                 var toBeEdited = (IBook)MainWindow.GetSelectedItem();
 
-                long isbn = toBeEdited.ISBN;
-
                 if (toBeEdited != null)
                 {
+                    long isbn = toBeEdited.ISBN;
+
                     bookWindow.SetBook(toBeEdited);
                     bookWindow.ShowDialog();
 
